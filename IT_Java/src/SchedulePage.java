@@ -1,6 +1,22 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    This class abstractly describe the dashboard with a schedule page
+    which is going to implement the following function requirement
+    from the client.
+    1. New, delete schedule in the page
+    2. Edit the information of a schedule in the page
+    3. Show future schedules
+    4. Notify the related contacts
+
+    Moreover, in order to improve the efficiency and the users' experience
+    we decided to add a sorting function and using binary search, therefore
+
+    (Bonus functions/ no requirement)
+    5. Sorting a schedule by name or time
+    6. Search the contact by name
+ */
 public class SchedulePage extends CRMObjectPage{
     // Each schedulePage should have a list containing the contacts
     private List<CRMObject> scheduleList = new ArrayList<>();
@@ -42,7 +58,7 @@ public class SchedulePage extends CRMObjectPage{
         return this.getContactList();
     }
 
-
+    // ToString method
     @Override
     public String toString() {
         return "SchedulePage{" +

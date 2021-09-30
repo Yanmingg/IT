@@ -3,10 +3,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
+/*
+    This class follow the requirement that import the information
+    from a csv file and creating contacts or schedules into the system.
+ */
 public class Importer {
-    private String filename = "/Users/jim/Desktop/IT_Project/IT_Java/res/import.csv";
-
-    public void loadCSV(List<CRMObject> contactList, List<CRMObject> scheduleList) {
+    public void loadCSV(List<CRMObject> contactList, List<CRMObject> scheduleList, String filename) {
         int lineNum = 1;
 
         // Reading the file with error handling
@@ -46,6 +48,7 @@ public class Importer {
         }
     }
 
+    // Constructor
     public Importer() {
     }
 }

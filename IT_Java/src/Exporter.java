@@ -2,9 +2,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+/*
+    This class follow the requirement that export the information
+    of contacts or schedules into a csv file.
+ */
 public class Exporter {
-    public void exportContact(List<CRMObject> lst) throws IOException {
-        FileWriter csvWriter = new FileWriter("ContactExported.csv");
+    public void exportContacts(List<CRMObject> lst) throws IOException {
+        FileWriter csvWriter = new FileWriter("ContactsExported.csv");
         csvWriter.append("Name");
         csvWriter.append(",");
         csvWriter.append("Phone");
@@ -23,8 +27,8 @@ public class Exporter {
         csvWriter.close();
     }
 
-    public void exportSchedule(List<CRMObject> lst) throws IOException {
-        FileWriter csvWriter = new FileWriter("ScheduleExported.csv");
+    public void exportSchedules(List<CRMObject> lst) throws IOException {
+        FileWriter csvWriter = new FileWriter("SchedulesExported.csv");
         csvWriter.append("Name");
         csvWriter.append(",");
         csvWriter.append("Time");
@@ -39,5 +43,9 @@ public class Exporter {
         }
         csvWriter.flush();
         csvWriter.close();
+    }
+
+    // Constructor
+    public Exporter() {
     }
 }

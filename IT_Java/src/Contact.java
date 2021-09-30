@@ -1,10 +1,10 @@
 public class Contact extends CRMObject{
     // Attributes of a contact
-    private String name = "NULL";
-    private String phone = "NULL";
-    private String email = "NULL";
-    private String teamName = "NULL";
-    private String remark = "NULL";
+    protected String name = "NULL";
+    protected String phone = "NULL";
+    protected String email = "NULL";
+    protected String teamName = "NULL";
+    protected String remark = "NULL";
     private Boolean marked = false;
 
     // Getter and setters
@@ -46,6 +46,15 @@ public class Contact extends CRMObject{
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    @Override
+    public void setMarked(Boolean marked) {
+        this.marked = marked;
+    }
+
+    // Constructor
+    public Contact() {
     }
 
     // Constructor

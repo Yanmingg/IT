@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.List;
 
 public class Schedule extends CRMObject{
     // Attributes of a schedule
@@ -6,18 +7,35 @@ public class Schedule extends CRMObject{
     private String time = "NULL";
     private String address = "NULL";
     private String context = "NULL";
+    private Contact relatedContact = null;
 
     // Constructor with a given name
     public Schedule(String name) {
         this.name = name;
     }
 
-    // Constructor with all the attributes
+    // Constructor with all basic information
     public Schedule(String name, String time, String address, String context) {
         this.name = name;
         this.time = time;
         this.address = address;
         this.context = context;
+    }
+
+    // Constructor with related contacts
+    public Schedule(String name, Contact contact) {
+        this.name = name;
+        this.relatedContact = contact;
+    }
+
+    // Constructor with all attributes
+    public Schedule(String name, String time, String address,
+                    String context, Contact contact) {
+        this.name = name;
+        this.time = time;
+        this.address = address;
+        this.context = context;
+        this.relatedContact = contact;
     }
 
     // Getters and setters
