@@ -24,6 +24,6 @@ public class UserController {
 
     @GetMapping("/index")
     public Object index(){
-        return 16516;
+        return userService.getById(1L);
     }
 }
