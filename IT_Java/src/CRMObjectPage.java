@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CRMObjectPage{
+    // Sorter and searcher
     protected Sorter sorter = new Sorter();
     protected Searcher searcher = new Searcher();
 

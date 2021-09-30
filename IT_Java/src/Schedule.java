@@ -71,6 +71,10 @@ public class Schedule extends CRMObject{
         this.context = context;
     }
 
+    public void setRelatedContact(Contact relatedContact) {
+        this.relatedContact = relatedContact;
+    }
+
     // This method is returning the attribute information into a csv format
     public String toCsv(){
         String csv = this.getName() + ',' + this.getTime() + ',' + this.getAddress() + ','

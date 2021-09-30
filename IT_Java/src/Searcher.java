@@ -1,7 +1,14 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    This class provide binary search methods to search the list by
+    name, team name, or time. Moreover, it's possible to implement
+    all attributes to search
+ */
 public class Searcher{
+
+    // Search by name
     public CRMObject bSearchName(CRMObjectPage objectPage, String name){
             List<CRMObject> lst = objectPage.sortName();
             int l = 0, r = lst.size() - 1;
