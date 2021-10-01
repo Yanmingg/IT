@@ -34,4 +34,12 @@ public class User extends Contact{
     public SchedulePage getSchedulePage() {
         return schedulePage;
     }
+
+    public void setContactPage(ContactPage contactPage) {
+        this.contactPage = contactPage;
+    }
+
+    public void setSchedulePage(SchedulePage schedulePage) {
+        this.schedulePage = schedulePage;
+    }
 }

@@ -48,7 +48,6 @@ public class Contact extends CRMObject{
         this.remark = remark;
     }
 
-    @Override
     public void setMarked(Boolean marked) {
         this.marked = marked;
     }

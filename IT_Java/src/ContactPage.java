@@ -75,7 +75,7 @@ public class ContactPage extends CRMObjectPage{
     public void editContactName(CRMObject contact, String name){
         for (CRMObject con: this.contactList) {
             if (contact.equals(con)){
-                con.setName(name);
+                ((Contact)con).setName(name);
             }
         }
     }
@@ -84,7 +84,7 @@ public class ContactPage extends CRMObjectPage{
     public void editContactPhone(CRMObject contact, String phone){
         for (CRMObject con: this.contactList) {
             if (contact.equals(con)){
-                con.setPhone(phone);
+                ((Contact)con).setPhone(phone);
             }
         }
     }
@@ -93,7 +93,7 @@ public class ContactPage extends CRMObjectPage{
     public void editContactEmail(CRMObject contact, String email){
         for (CRMObject con: this.contactList) {
             if (contact.equals(con)){
-                con.setEmail(email);
+                ((Contact)con).setEmail(email);
             }
         }
     }
@@ -102,7 +102,7 @@ public class ContactPage extends CRMObjectPage{
     public void editContactTeamName(CRMObject contact, String teamName){
         for (CRMObject con: this.contactList) {
             if (contact.equals(con)){
-                con.setTeamName(teamName);
+                ((Contact)con).setTeamName(teamName);
             }
         }
     }
@@ -111,7 +111,7 @@ public class ContactPage extends CRMObjectPage{
     public void editContactRemark(CRMObject contact, String remark){
         for (CRMObject con: this.contactList) {
             if (contact.equals(con)){
-                con.setRemark(remark);
+                ((Contact)con).setRemark(remark);
             }
         }
     }
@@ -121,8 +121,12 @@ public class ContactPage extends CRMObjectPage{
     // 3. Search the contact by name or team name
     // Search the name of a contact
     // (Using binary search to improve searching efficiency)
-    public CRMObject searchName(String name) {
+    public List<CRMObject> searchName(String name) {
         return super.searcher.bSearchName(this, name);
+    }
+
+    public List<CRMObject> searchTeamName(String name) {
+        return super.searcher.bSearchTeamName(this, name);
     }
     //-------------------------------------------------------------------3
 
@@ -132,7 +136,7 @@ public class ContactPage extends CRMObjectPage{
     public void editContactMarked(CRMObject contact, Boolean marked){
         for (CRMObject con: this.contactList) {
             if (contact.equals(con)){
-                con.setMarked(marked);
+                ((Contact)con).setMarked(marked);
             }
         }
     }
@@ -146,9 +150,9 @@ public class ContactPage extends CRMObjectPage{
         String emailContactR;
         for (CRMObject con: contactList) {
             if (con.equals(contactS)){
-                emailContactS = con.getEmail();
+                emailContactS = ((Contact)con).getEmail();
             }else if (con.equals(contactR)){
-                emailContactR = con.getEmail();
+                emailContactR = ((Contact)con).getEmail();
             }
         }
     }
@@ -165,13 +169,25 @@ public class ContactPage extends CRMObjectPage{
     // Sort the list by attribute phone
     // (Not the required function of the clients)
     public List<CRMObject> sortPhone() {
-        return super.sorter.sortPhone(this.contactList);
+        return super.sorter.sortPhone(this);
     }
 
     // Sort the list by attribute email
     // (Not the required function of the clients)
     public List<CRMObject> sortEmail() {
-        return super.sorter.sortEmail(this.contactList);
+        return super.sorter.sortEmail(this);
+    }
+
+    // Sort the list by attribute Team Name
+    // (Not the required function of the clients)
+    public List<CRMObject> sortTeamName() {
+        return super.sorter.sortTeamName(this);
+    }
+
+    // Sort the list by attribute Remark
+    // (Not the required function of the clients)
+    public List<CRMObject> sortRemark() {
+        return super.sorter.sortRemark(this);
     }
     //-------------------------------------------------------------------6
 

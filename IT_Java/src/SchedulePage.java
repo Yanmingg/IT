@@ -64,7 +64,7 @@ public class SchedulePage extends CRMObjectPage{
     public void editScheduleName(Schedule schedule, String name){
         for (CRMObject con: this.scheduleList) {
             if (schedule.equals(con)){
-                con.setName(name);
+                ((Schedule) con).setName(name);
             }
         }
     }
@@ -109,7 +109,7 @@ public class SchedulePage extends CRMObjectPage{
     //-------------------------------------------------------------------3
     // 3. Show future schedules (Not completed so far)
     public List<CRMObject> futureSchedules(String currentTime){
-        return this.scheduleList;
+        return super.sorter.sortTime(this);
     }
     //-------------------------------------------------------------------3
 
@@ -135,7 +135,7 @@ public class SchedulePage extends CRMObjectPage{
     // 6. Search the contact by name
     // Search the name of a schedule
     // (Using binary search to improve searching efficiency)
-    public CRMObject searchName(String name) {
+    public List<CRMObject> searchName(String name) {
         return super.searcher.bSearchName(this, name);
     }
     //-------------------------------------------------------------------6

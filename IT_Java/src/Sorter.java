@@ -15,27 +15,27 @@ public class Sorter {
     }
 
     // Sort by phone
-    public List<CRMObject> sortPhone(List<CRMObject> lst) {
-        Collections.sort(lst, new PhoneComparator());
-        return lst;
+    public List<CRMObject> sortPhone(ContactPage contactPage) {
+        Collections.sort(contactPage.getContactList(), new PhoneComparator());
+        return contactPage.getContactList();
     }
 
     // Sort by email
-    public List<CRMObject> sortEmail(List<CRMObject> lst) {
-        Collections.sort(lst, new EmailComparator());
-        return lst;
+    public List<CRMObject> sortEmail(ContactPage contactPage) {
+        Collections.sort(contactPage.getContactList(), new EmailComparator());
+        return contactPage.getContactList();
     }
 
     // Sort by team name
-    public List<CRMObject> sortTeam(List<CRMObject> lst) {
-        Collections.sort(lst, new TeamComparator());
-        return lst;
+    public List<CRMObject> sortTeamName(ContactPage contactPage) {
+        Collections.sort(contactPage.getContactList(), new TeamNameComparator());
+        return contactPage.getContactList();
     }
 
     // Sort by remark
-    public List<CRMObject> sortRemark(List<CRMObject> lst) {
-        Collections.sort(lst, new RemarkComparator());
-        return lst;
+    public List<CRMObject> sortRemark(ContactPage contactPage) {
+        Collections.sort(contactPage.getContactList(), new RemarkComparator());
+        return contactPage.getContactList();
     }
 
     // Sort by time
@@ -53,25 +53,25 @@ public class Sorter {
 
     public class PhoneComparator implements Comparator<CRMObject> {
         public int compare(CRMObject m1, CRMObject m2) {
-            return m1.getPhone().compareTo(m2.getPhone());
+            return ((Contact)m1).getPhone().compareTo(((Contact) m2).getPhone());
         }
     }
 
     public class EmailComparator implements Comparator<CRMObject> {
         public int compare(CRMObject m1, CRMObject m2) {
-            return m1.getEmail().compareTo(m2.getEmail());
+            return ((Contact)m1).getEmail().compareTo(((Contact) m2).getEmail());
         }
     }
 
-    public class TeamComparator implements Comparator<CRMObject> {
+    public class TeamNameComparator implements Comparator<CRMObject> {
         public int compare(CRMObject m1, CRMObject m2) {
-            return m1.getTeamName().compareTo(m2.getTeamName());
+            return ((Contact)m1).getTeamName().compareTo(((Contact) m2).getTeamName());
         }
     }
 
     public class RemarkComparator implements Comparator<CRMObject> {
         public int compare(CRMObject m1, CRMObject m2) {
-            return m1.getRemark().compareTo(m2.getRemark());
+            return ((Contact)m1).getRemark().compareTo(((Contact) m2).getRemark());
         }
     }
 

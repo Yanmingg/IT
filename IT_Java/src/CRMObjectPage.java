@@ -7,10 +7,12 @@ public class CRMObjectPage{
     protected Searcher searcher = new Searcher();
     protected List<CRMObject> crmList = new ArrayList<>();
 
+    // Getter
     public List<CRMObject> getCrmList() {
         return crmList;
     }
 
+    // Sort name
     public List<CRMObject> sortName() {
         return sorter.sortName(this);
     }
