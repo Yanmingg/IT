@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class SchedulePage extends CRMObjectPage{
     // Each schedulePage should have a list containing the contacts
-    private List<CRMObject> scheduleList = new ArrayList<>();
+    private List<CRMObject> scheduleList = super.crmList;
 
     // Constructor
     public SchedulePage() {
@@ -54,7 +54,7 @@ public class SchedulePage extends CRMObjectPage{
     // Remove a given schedule form the list
     public List<CRMObject> deleteContact(CRMObject schedule){
         this.getScheduleList().remove(schedule);
-        return this.getContactList();
+        return this.getScheduleList();
     }
     //-------------------------------------------------------------------1
 
@@ -123,7 +123,11 @@ public class SchedulePage extends CRMObjectPage{
     // Sort the list by attribute name
     // (Not the required function of the clients)
     public List<CRMObject> sortName() {
-        return super.sorter.sortName(this.scheduleList);
+        return super.sorter.sortName(this);
+    }
+
+    public List<CRMObject> sortTime() {
+        return super.sorter.sortTime(this);
     }
     //-------------------------------------------------------------------5
 

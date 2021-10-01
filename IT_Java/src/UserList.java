@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllUser {
+public class UserList {
     private List<User> allUsers = new ArrayList<>();
 }

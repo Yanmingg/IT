@@ -8,11 +8,10 @@ import java.util.List;
     all attributes to sort.
  */
 public class Sorter {
-
-    // Sort by name
-    public List<CRMObject> sortName(List<CRMObject> lst) {
-        Collections.sort(lst, new NameComparator());
-        return lst;
+    // Sort by contact name
+    public List<CRMObject> sortName(CRMObjectPage crmObjectPage) {
+        Collections.sort(crmObjectPage.getCrmList(), new NameComparator());
+        return crmObjectPage.getCrmList();
     }
 
     // Sort by phone
@@ -37,6 +36,12 @@ public class Sorter {
     public List<CRMObject> sortRemark(List<CRMObject> lst) {
         Collections.sort(lst, new RemarkComparator());
         return lst;
+    }
+
+    // Sort by time
+    public List<CRMObject> sortTime(SchedulePage schedulePage) {
+        Collections.sort(schedulePage.getScheduleList(), new TimeComparator());
+        return schedulePage.getScheduleList();
     }
 
     // Comparators
@@ -67,6 +72,12 @@ public class Sorter {
     public class RemarkComparator implements Comparator<CRMObject> {
         public int compare(CRMObject m1, CRMObject m2) {
             return m1.getRemark().compareTo(m2.getRemark());
+        }
+    }
+
+    public class TimeComparator implements Comparator<CRMObject> {
+        public int compare(CRMObject m1, CRMObject m2) {
+            return ((Schedule)m1).getTime().compareTo(((Schedule) m2).getTime());
         }
     }
 }

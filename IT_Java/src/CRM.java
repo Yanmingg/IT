@@ -12,18 +12,10 @@ public class CRM {
     public static void main(String[] argc) throws IOException {
         Contact contact1 = new Contact("Tianyu");
         contactPage.newContact(contact1);
-//        System.out.println(schedulePage.toString());
-//        System.out.println(schedulePage.sortName().toString());
-//        System.out.println(schedulePage.bSearchAll("beeting3"));
-//        System.out.println(contactPage.getContactList());
 //
         importer.loadCSV(contactPage.getContactList(),schedulePage.getScheduleList(), filename);
-//        exporter.exportContacts(contactPage.getContactList());
-//        exporter.exportSchedules(schedulePage.getScheduleList());
-////        System.out.println(contactPage.getContactList());
-//        //System.out.println(schedulePage.deleteContact(contact1));
-        System.out.println(contactPage.toString());
-        contactPage.editContactName(contact1, "TianyuHuang");
-        System.out.println(contactPage.toString());
+        System.out.println(schedulePage.getScheduleList());
+
+        System.out.println(schedulePage.sortName());
     }
 }

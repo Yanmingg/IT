@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class ContactPage extends CRMObjectPage{
     // Each contactPage should have a list containing the contacts
-    private List<CRMObject> contactList = new ArrayList<>();
+    private List<CRMObject> contactList = super.crmList;
 
     // Constructor
     public ContactPage() {
@@ -159,7 +159,7 @@ public class ContactPage extends CRMObjectPage{
     // Sort the list by attribute name
     // (Not the required function of the clients)
     public List<CRMObject> sortName() {
-        return super.sorter.sortName(this.contactList);
+        return super.sorter.sortName(this);
     }
 
     // Sort the list by attribute phone
