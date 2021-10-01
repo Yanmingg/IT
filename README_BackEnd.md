@@ -45,20 +45,20 @@ The system support to create the information of contacts or schedules by
 reading a csv file. Or export the information to a csv file
 
 # Version control
-Version 1.0 - Start constructing the structor followed by desgin diagram
-Version 1.0 - Added strategy pattern
-Version 1.0 - Improve the pettern design
-Version 1.0 - Added classes: Contact, Schedule
-Version 1.0 - Added classes: ContactPage, SchedulePage
-Version 1.0 - Added new, delete methods
-Version 1.0 - Added sorting and searching algorithm for the attribute name
-Version 1.0 - Redesign of the system, adding inheritance to follow GRASP principle
-Version 1.0 - Sign ContactPage and SchedulePage to inherit CRMObjectPage class
-Version 1.0 - Fixed the bug of searching algorithm
-Version 1.0 - Added import and export csv algorithm for the system
-Version 1.0 - Done with information edit functions
-Version 1.0 - Added comments to the system
-Version 1.0 - Redesign the sorting algorithm and improve the design of inheritance
+Version 1.0 - Start constructing the structor followed by desgin diagram  
+Version 1.0 - Added strategy pattern  
+Version 1.0 - Improve the pettern design  
+Version 1.0 - Added classes: Contact, Schedule  
+Version 1.0 - Added classes: ContactPage, SchedulePage  
+Version 1.0 - Added new, delete methods  
+Version 1.0 - Added sorting and searching algorithm for the attribute name  
+Version 1.0 - Redesign of the system, adding inheritance to follow GRASP principle  
+Version 1.0 - Sign ContactPage and SchedulePage to inherit CRMObjectPage class  
+Version 1.0 - Fixed the bug of searching algorithm  
+Version 1.0 - Added import and export csv algorithm for the system  
+Version 1.0 - Done with information edit functions  
+Version 1.0 - Added comments to the system  
+Version 1.0 - Redesign the sorting algorithm and improve the design of inheritance  
 
 # Contributing
 This part of the project is written by Yanming Guo, thanks for the testing and advice
