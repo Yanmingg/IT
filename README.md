@@ -1,10 +1,9 @@
-- [Personal-CRM (Backend])](#personal-crm--backend-code-)
-- [Description of the project](#Description of the project)
-    - [Contact functions](#Contact functions)
-    - [Schedule functions](#Schedule functions)
-    - [Contact functions](#Import/export functions)
-- [Section1](#section1)
-- [Scetion2](#scetion2)
+- [Personal-CRM (Backend)](#personal-crm--backend-)
+- [Description of the project](#description-of-the-project)
+  * [Contact functions:](#contact-functions-)
+  * [Schedule functions:](#schedule-functions-)
+  * [Import/export functions:](#import-export-functions-)
+- [Contributing](#contributing)
 
 
 # Personal-CRM (Backend)
