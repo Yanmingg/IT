@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Schedule extends CRMObject{
     // Attributes of a schedule
-    private String name = "NULL";
+    private String name = super.getName();
     private String time = "NULL";
     private String address = "NULL";
     private String context = "NULL";

@@ -17,4 +17,9 @@ public class CRMObjectPage{
         return sorter.sortName(this);
     }
 
+    // Search name
+    public List<CRMObject> bSearchName(String name) {
+        return searcher.bSearchName(this, name);
+    }
+
 }

@@ -52,7 +52,7 @@ public class SchedulePage extends CRMObjectPage{
     }
 
     // Remove a given schedule form the list
-    public List<CRMObject> deleteContact(CRMObject schedule){
+    public List<CRMObject> deleteSchedule(CRMObject schedule){
         this.getScheduleList().remove(schedule);
         return this.getScheduleList();
     }

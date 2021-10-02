@@ -1,6 +1,6 @@
 public class Contact extends CRMObject{
     // Attributes of a contact
-    protected String name = "NULL";
+    protected String name = super.getName();
     protected String phone = "NULL";
     protected String email = "NULL";
     protected String teamName = "NULL";
