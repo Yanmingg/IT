@@ -1,3 +1,4 @@
+import javax.mail.MessagingException;
 import java.io.IOException;
 
 public class CRM {
@@ -6,8 +7,9 @@ public class CRM {
     static CRMTest crmTest = new CRMTest();
     static Exporter exporter = new Exporter();
     static String filename = "/Users/jim/Desktop/IT_Project/IT_Java/res/import.csv";
+    static EmailSender emailSender = new EmailSender();
 
-    public static void main(String[] argc) throws IOException {
+    public static void main(String[] argc) throws IOException, MessagingException {
         user1.setContactPage(crmTest.loadContact());
         user1.setSchedulePage(crmTest.loadSchedule());
         Contact contact1 = new Contact("Tianyu");
@@ -18,5 +20,7 @@ public class CRM {
 
         System.out.println(user1.getSchedulePage().sortName());
         System.out.println(user1.getSchedulePage().searchName("beeting3"));
+
+        emailSender.send();
     }
 }
