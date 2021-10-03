@@ -154,7 +154,10 @@ Version 1.0 - Allowed users to send more than one email at the same time
 Version 1.0 - Fixed the bug of sending email form an user
 
 # Contributing
-This part of the project is written by Yanming Guo, thanks for the testing and advice
+The UI interface is written by Ling Huang and Jinjie Ding.  
+Java codes are written by Yanming Guo.  
+DataBase was built by Quanying Lyu.
+Thanks for the testing and advice
 by all people who contribute
 <a href="https://github.com/Yanmingg/IT/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Yanmingg/IT" />
