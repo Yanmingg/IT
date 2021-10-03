@@ -20,13 +20,13 @@ import javax.mail.internet.MimeMultipart;
 public class EmailSender{
     private Session newSession = null;
     private MimeMessage mimeMessage = null;
-    private String OFFICIAL_ACCOUNT = "personalcrmofficial@gmail.com";
-    private String OFFICIAL_ACCOUNT_PASSWORD = "Gym20010212";
 
     // Send email to customer by an official account
     private void sendEmail() throws MessagingException {
-        String fromUser = OFFICIAL_ACCOUNT;  //Enter sender email id
-        String fromUserPassword = OFFICIAL_ACCOUNT_PASSWORD;  //Enter sender gmail password , this will be authenticated by gmail smtp server
+        String OFFICIAL_ACCOUNT = "personalcrmofficial@gmail.com";
+        String OFFICIAL_ACCOUNT_PASSWORD = "Gym20010212";
+        String fromUser = OFFICIAL_ACCOUNT;
+        String fromUserPassword = OFFICIAL_ACCOUNT_PASSWORD;
         String emailHost = "smtp.gmail.com";
         Transport transport = newSession.getTransport("smtp");
         transport.connect(emailHost, fromUser, fromUserPassword);
