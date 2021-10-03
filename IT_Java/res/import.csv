@@ -1,0 +1,10 @@
+Contact,name1,phone1,email1,team1,remark1
+Contact,name2,phone2,null,null,remark2
+Contact,name3,null,null,team3,remark3
+Contact,name4,phone4,email4,team4,remark4
+Contact,name5,phone5,email5,team5,remark5
+Schedule,name1,time1,address1,context1
+Schedule,name2,time2,address2,context2
+Schedule,name3,time3,address3,context3
+Schedule,name4,time4,address4,context4
+Schedule,name5,time5,address5,context5
