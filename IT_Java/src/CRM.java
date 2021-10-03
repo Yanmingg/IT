@@ -20,6 +20,7 @@ public class CRM {
         user1.getContactPage().newContact(contact2);
         user1.getContactPage().newContact(contact3);
         user1.getContactPage().newContact(contact4);
+        // ff
        // importer.loadCSV(user1.getContactPage().getContactList(),user1.getSchedulePage().getScheduleList(), filename);
         System.out.println(user1.getSchedulePage().getScheduleList());
 
