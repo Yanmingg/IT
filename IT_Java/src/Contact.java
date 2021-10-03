@@ -71,9 +71,9 @@ public class Contact extends CRMObject{
     }
 
 
-    public Contact(String name, String phone){
+    public Contact(String name, String email){
         this.name = name;
-        this.phone = phone;
+        this.email = email;
     }
 
     // This method marks the contact as "important"

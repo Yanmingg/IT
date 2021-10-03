@@ -1,3 +1,5 @@
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,17 +11,18 @@ import java.util.List;
     2. Edit the information of a contact in the page
     3. Search the contact by name or team name
     4. Add mark status to the contacts
-    5. Send email to a contact
 
     Moreover, in order to improve the efficiency and the users' experience
     we decided to add a sorting function and using binary search, therefore
 
     (Bonus functions/ no requirement)
-    6. Sorting the contact by name, phone, email or team name
+    5. Sorting the contact by name, phone, email or team name
  */
 public class ContactPage extends CRMObjectPage{
     // Each contactPage should have a list containing the contacts
     private List<CRMObject> contactList = super.crmList;
+    private EmailSender emailSender = new EmailSender();
+    private List<Contact> emailContactList = new ArrayList<>();
 
     // Constructor
     public ContactPage() {
@@ -143,23 +146,7 @@ public class ContactPage extends CRMObjectPage{
     //-------------------------------------------------------------------4
 
     //-------------------------------------------------------------------5
-    // 5. Send email to a contact
-    public void sendEmail(Contact contactS, Contact contactR,
-                          String email){
-        String emailContactS;
-        String emailContactR;
-        for (CRMObject con: contactList) {
-            if (con.equals(contactS)){
-                emailContactS = ((Contact)con).getEmail();
-            }else if (con.equals(contactR)){
-                emailContactR = ((Contact)con).getEmail();
-            }
-        }
-    }
-    //-------------------------------------------------------------------5
-
-    //-------------------------------------------------------------------6
-    // 6. Sorting the contact by name, phone, email or team name
+    // 5. Sorting the contact by name, phone, email or team name
     // Sort the list by attribute name
     // (Not the required function of the clients)
     public List<CRMObject> sortName() {
@@ -189,6 +176,6 @@ public class ContactPage extends CRMObjectPage{
     public List<CRMObject> sortRemark() {
         return super.sorter.sortRemark(this);
     }
-    //-------------------------------------------------------------------6
+    //-------------------------------------------------------------------5
 
 }
