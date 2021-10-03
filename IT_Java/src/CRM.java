@@ -27,7 +27,7 @@ public class CRM {
         System.out.println(user1.getSchedulePage().searchName("beeting3"));
         //user1.getContactPage().sendEmail(contact2,contact1,"Test", "TestEmail");
         System.out.println(user1.getContactPage().getContactList());
-        user1.sendEmailToContact(contact1, "Testing by user 10", "Test!");
+        user1.sendEmailToContact(contact1, "Testing by user 10:19", "Test!");
         user1.addEmailContacts(contact1);
         user1.addEmailContacts(contact3);
         user1.addEmailContacts(contact4);
