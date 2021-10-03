@@ -1,5 +1,6 @@
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -24,11 +25,8 @@ public class User extends Contact{
     private ContactPage contactPage = new ContactPage();
     private SchedulePage schedulePage = new SchedulePage();
     private EmailSender emailSender = new EmailSender();
-    private List<String> notificationList;
-
-    public List<String> getNotificationList() {
-        return notificationList;
-    }
+    private List<Contact> emailContact = new ArrayList<>();
+    private List<String> emailAddress = new ArrayList<>();
 
     // To check whether one contact is equal to an user
     public boolean userEqual(Contact contact){
@@ -37,6 +35,18 @@ public class User extends Contact{
             return true;
         }
         return false;
+    }
+
+    // Add emails to a list
+    public List<String> addEmailAddress(String email){
+        this.emailAddress.add(email);
+        return emailAddress;
+    }
+
+    // Add contacts
+    public List<Contact> addEmailContacts(Contact contact){
+        this.emailContact.add(contact);
+        return emailContact;
     }
 
     // Constructors and getters
@@ -50,7 +60,6 @@ public class User extends Contact{
     public User(String name, String email) {
         super(name, email);
     }
-
 
     public ContactPage getContactPage() {
         return contactPage;
@@ -66,6 +75,14 @@ public class User extends Contact{
 
     public void setSchedulePage(SchedulePage schedulePage) {
         this.schedulePage = schedulePage;
+    }
+
+    public List<Contact> getEmailContact() {
+        return emailContact;
+    }
+
+    public List<String> getEmailAddress() {
+        return emailAddress;
     }
 
     //-------------------------------------------------------------------1
@@ -94,14 +111,34 @@ public class User extends Contact{
     //-------------------------------------------------------------------1
 
     //-------------------------------------------------------------------2
-    // 2. Be able to send email to contacts
+    // 2. Be able to send email to several contacts
+    public void sendEmailToContacts(List<Contact> contactsR,
+                                   String emailSubject, String emailBody) throws IOException, MessagingException {
+        String showSender;
+
+        String emailContactS = this.getEmail();
+        String nameContactS = this.getName();
+        List<String> emailContactsR = new ArrayList<>();
+
+        //System.out.println(contactS.toString());
+        for (CRMObject con: this.getContactPage().getContactList()) {
+            for (Contact conR: contactsR){
+                if (con.equals(conR)){
+                    emailContactsR.add(((Contact)con).getEmail());
+                }
+            }
+        }
+        showSender = "This email was sent by "+ nameContactS + ". Which email is: " + emailContactS + ".\n";
+        String body = showSender + emailBody;
+        emailSender.sendEmail(emailContactsR, emailSubject, body);
+    }
     //-------------------------------------------------------------------2
 
 
     //-------------------------------------------------------------------3
     // 3. Be able to send email to a valid email address
-    public void sendEmailToAddress(String emailAddress,
-                                   String emailSubject, String emailBody) throws IOException, MessagingException {
+    public void sendEmailToAddress(String emailAddress, String emailSubject,
+                                   String emailBody) throws IOException, MessagingException {
         String showSender;
 
         String emailContactS = this.getEmail();
@@ -120,13 +157,13 @@ public class User extends Contact{
 
     //-------------------------------------------------------------------4
     // 4. Be able to send email to valid email addresses
-    public void sendEmailToAddresses(String[] emailAddresses,
-                                   String emailSubject, String emailBody) throws IOException, MessagingException {
+    public void sendEmailToAddresses(List<String> emailAddresses,
+                                   String emailSubject, String emailBody) throws IOException,
+            MessagingException {
         String showSender;
 
         String emailContactS = this.getEmail();
         String nameContactS = this.getName();
-
         //System.out.println(contactS.toString());
 
         showSender = "This email was sent by "+ nameContactS + ". Which email is: " + emailContactS + ".\n";

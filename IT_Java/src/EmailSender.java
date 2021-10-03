@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -10,13 +11,22 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+/*
+    This class provides the functions to send emails, which provides
+    two methods to deal with sending one email or several emails.
+    1. Giving one email address
+    2. Giving an array list of email address
+ */
 public class EmailSender{
-    Session newSession = null;
-    MimeMessage mimeMessage = null;
+    private Session newSession = null;
+    private MimeMessage mimeMessage = null;
+    private String OFFICIAL_ACCOUNT = "personalcrmofficial@gmail.com";
+    private String OFFICIAL_ACCOUNT_PASSWORD = "Gym20010212";
 
+    // Send email to customer by an official account
     private void sendEmail() throws MessagingException {
-        String fromUser = "personalcrmofficial@gmail.com";  //Enter sender email id
-        String fromUserPassword = "Gym20010212";  //Enter sender gmail password , this will be authenticated by gmail smtp server
+        String fromUser = OFFICIAL_ACCOUNT;  //Enter sender email id
+        String fromUserPassword = OFFICIAL_ACCOUNT_PASSWORD;  //Enter sender gmail password , this will be authenticated by gmail smtp server
         String emailHost = "smtp.gmail.com";
         Transport transport = newSession.getTransport("smtp");
         transport.connect(emailHost, fromUser, fromUserPassword);
@@ -25,34 +35,7 @@ public class EmailSender{
         System.out.println("Email successfully sent!!!");
     }
 
-    private MimeMessage defaultDraftEmail() throws AddressException, MessagingException, IOException {
-        String[] emailReceipients = {"yanmingg@student.unimelb.edu.au", "thhuang@student.unimelb.edu.au",
-                "jinjied@student.unimelb.edu.au", "linghuang@student.unimelb.edu.au","quanyingl@student.unimelb.edu.au"};  //Enter list of email recepients
-        String emailSubject = "PCRM from team66";
-        String emailBody = "Hi, there! Our team66 is glad to invite to be beta-developer for our product Personal CRM!";
-        mimeMessage = new MimeMessage(newSession);
-
-        for (int i =0 ;i<emailReceipients.length;i++)
-        {
-            mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(emailReceipients[i]));
-        }
-        mimeMessage.setSubject(emailSubject);
-
-        // CREATE MIMEMESSAGE
-        // CREATE MESSAGE BODY PARTS
-        // CREATE MESSAGE MULTIPART
-        // ADD MESSAGE BODY PARTS ----> MULTIPART
-        // FINALLY ADD MULTIPART TO MESSAGECONTENT i.e. mimeMessage object
-
-
-        MimeBodyPart bodyPart = new MimeBodyPart();
-        bodyPart.setContent(emailBody,"html/text");
-        MimeMultipart multiPart = new MimeMultipart();
-        multiPart.addBodyPart(bodyPart);
-        mimeMessage.setContent(multiPart);
-        return mimeMessage;
-    }
-
+    // Setting up server
     private void setupServerProperties() {
         Properties properties = System.getProperties();
         properties.put("mail.smtp.port", "587");
@@ -61,36 +44,17 @@ public class EmailSender{
         newSession = Session.getDefaultInstance(properties,null);
     }
 
-    public void send() throws IOException, MessagingException {
-        this.setupServerProperties();
-        this.defaultDraftEmail();
-        this.sendEmail();
-    }
-
-    public void sendEmail(String[] receiver, String emailSubject, String emailBody) throws IOException, MessagingException {
-        this.setupServerProperties();
-        this.draftEmail(receiver, emailSubject, emailBody);
-        this.sendEmail();
-    }
-    private MimeMessage draftEmail(String[] receiver, String emailSubject, String emailBody) throws AddressException, MessagingException, IOException {
-        //String[] emailReceipients = {"yanmingg@student.unimelb.edu.au", "thhuang@student.unimelb.edu.au",
-              //  "jinjied@student.unimelb.edu.au", "linghuang@student.unimelb.edu.au","quanyingl@student.unimelb.edu.au"};  //Enter list of email recepients
-        //String emailSubject = "PCRM from team66";
-        //String emailBody = "Hi, there! Our team66 is glad to invite to be beta-developer for our product Personal CRM!";
+    // Hold to send email to several customers
+    private MimeMessage draftEmail(List<String> receiver, String emailSubject,
+                                   String emailBody) throws AddressException,
+            MessagingException, IOException {
         mimeMessage = new MimeMessage(newSession);
 
-        for (int i =0 ;i<receiver.length;i++)
+        for (String email: receiver)
         {
-            mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver[i]));
+            mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
         }
         mimeMessage.setSubject(emailSubject);
-
-        // CREATE MIMEMESSAGE
-        // CREATE MESSAGE BODY PARTS
-        // CREATE MESSAGE MULTIPART
-        // ADD MESSAGE BODY PARTS ----> MULTIPART
-        // FINALLY ADD MULTIPART TO MESSAGECONTENT i.e. mimeMessage object
-
 
         MimeBodyPart bodyPart = new MimeBodyPart();
         bodyPart.setText(emailBody);
@@ -100,23 +64,13 @@ public class EmailSender{
         return mimeMessage;
     }
 
+    // Hold to send email to one customer
     private MimeMessage draftOneEmail(String receiver, String emailSubject, String emailBody) throws AddressException, MessagingException, IOException {
-        //String[] emailReceipients = {"yanmingg@student.unimelb.edu.au", "thhuang@student.unimelb.edu.au",
-        //  "jinjied@student.unimelb.edu.au", "linghuang@student.unimelb.edu.au","quanyingl@student.unimelb.edu.au"};  //Enter list of email recepients
-        //String emailSubject = "PCRM from team66";
-        //String emailBody = "Hi, there! Our team66 is glad to invite to be beta-developer for our product Personal CRM!";
         mimeMessage = new MimeMessage(newSession);
 
         mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
         mimeMessage.setSubject(emailSubject);
 
-        // CREATE MIMEMESSAGE
-        // CREATE MESSAGE BODY PARTS
-        // CREATE MESSAGE MULTIPART
-        // ADD MESSAGE BODY PARTS ----> MULTIPART
-        // FINALLY ADD MULTIPART TO MESSAGECONTENT i.e. mimeMessage object
-
-
         MimeBodyPart bodyPart = new MimeBodyPart();
         bodyPart.setText(emailBody);
         MimeMultipart multiPart = new MimeMultipart();
@@ -125,9 +79,18 @@ public class EmailSender{
         return mimeMessage;
     }
 
+    // Ready to send one email
     public void sendOneEmail(String receiver, String emailSubject, String emailBody) throws IOException, MessagingException {
         this.setupServerProperties();
         this.draftOneEmail(receiver, emailSubject, emailBody);
+        this.sendEmail();
+    }
+
+    // Ready to send emails
+    public void sendEmail(List<String> receiver, String emailSubject,
+                          String emailBody) throws IOException, MessagingException {
+        this.setupServerProperties();
+        this.draftEmail(receiver, emailSubject, emailBody);
         this.sendEmail();
     }
 }
