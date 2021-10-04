@@ -30,17 +30,18 @@
 					
 					<a-col :span="24" :md="12" style="display: flex; align-items: center; justify-content: flex-end">
 						 <a-radio-group :value="size" @change="handleSizeChange"> 
-							 <a-button type="primary" @click="showModal">Create</a-button>
-								<a-modal
-									ref="collectionForm"
-									:visible="visible"
-									@cancel="handleCancel"
-									@create="handleCreate"
-									>
-									    <CreatTaskForm
-											:data="conversationsData"
-										></CreatTaskForm>
-								</a-modal>
+							<div>
+							 <a-button type="primary" @click="showModal">
+							Create
+							</a-button>
+							<collection-create-form
+							ref="collectionForm"
+							:visible="visible"
+							@cancel="handleCancel"
+							@create="handleCreate"
+							/>
+						</div>
+								
 						</a-radio-group>
 					</a-col>
 
@@ -53,18 +54,7 @@
 		<a-row type="flex" :gutter="24">
 			<!-- Platform Settings Column -->
 			<!-- span是间距，md是宽 -->
-			<a-col :span="24" :md="100" class="mb-24">
-				<!-- Platform Settings Card -->
-
-                <CardConversations
-					:data="conversationsData"
-				></CardConversations>
-				<!-- <CardPlatformSettings></CardPlatformSettings> -->
-
-
-				<!-- / Platform Settings Card -->
-
-			</a-col>
+			
 
 			<!-- / Platform Settings Column -->
 
@@ -82,6 +72,19 @@
 
 				<!-- / Conversations Card -->
 			</a-col>
+
+			<a-col :span="24" :md="100" class="mb-24">
+				<!-- Platform Settings Card -->
+				<a-card >
+                <CardConversations
+					:data="donedata"
+				></CardConversations>
+				<!-- <CardPlatformSettings></CardPlatformSettings> -->
+				</a-card>
+
+				<!-- / Platform Settings Card -->
+
+			</a-col>
 			<!-- / Conversations Column -->
 		</a-row>
 		
@@ -94,71 +97,71 @@
 <script>
     import Cardtodo from '../components/Cards/todo.vue';
     import CardConversations from '../components/Cards/CardConversations.vue';
-	import CreatTaskForm from '../components/Form/creatTask.vue';
+	//import CreatTaskForm from '../components/Form/creatTask.vue';
 	// Conversation's list data.
-	const conversationsData = [
-		{
-			id: "1",
-			title: "Meeting",
-			code: "with it project group",
-            time:"19:00",
-            date:"seq 18",
-			//avatar: "images/face-3.jpg",
+	const CollectionCreateForm = {
+		props: ['visible'],
+		beforeCreate() {
+			this.form = this.$form.createForm(this, { name: 'form_in_modal' });
 		},
-		{
-			id: "2",
-			title: "Meeting",
-			code: "with it project group",
-            time:"19:00",
-            date:"seq 18",
-			//avatar: "images/face-4.jpg",
-		},
-		{
-			id: "3",
-			title: "Meeting",
-			code: "with it project group",
-            time:"19:00",
-            date:"seq 18",
-			//avatar: "images/face-5.jpeg",
-		},
-		{
-			id: "4",
-			title: "Meeting",
-			code: "with it project group",
-            time:"19:00",
-            date:"seq 18",
-			//avatar: "images/face-6.jpeg",
-		},
-		{
-			id: "5",
-			title: "Meeting",
-			code: "with it project group",
-            time:"19:00",
-            date:"seq 18",
-			//avatar: "images/face-2.jpg",
-		},
+		template: `
+			<a-modal
+			:visible="visible"
+			title='Create a new Task'
+			okText='Create'
+			@cancel="() => { $emit('cancel') }"
+			@ok="() => { $emit('create') }"
+			>
+			<a-form layout='vertical' :form="form">
+				<a-form-item label='Nmae'>
+				<a-input
+					v-decorator="[
+					'name',
+					{
+						rules: [{ required: true, message: 'Please input the name of task!' }],
+					}
+					]"
+				/>
+				</a-form-item>
+
+
+				<a-form-item label="Due Date">
+					<a-date-picker
+						v-decorator="['time', {rules: [{ required: true, message: 'Please select time!' }],}]"
+						show-time
+						format="YYYY-MM-DD HH:mm:ss"
+					/>
+    			</a-form-item>
+
+				<a-form-item label='Relevant Personnel'>
+				<a-input
+					v-decorator="[
+					'contactid'
+					]"
+				/>
+				</a-form-item>
+
+				<a-form-item label='Description'>
+				<a-input
+					type='textarea'
+					v-decorator="['description']"
+				/>
+				</a-form-item>
+
+
+				
+
+			</a-form>
+			</a-modal>
+		`,
+	};
+
+	const donedata = [
+		
 	] ;
 	const tododata = [
-		{
-			id: "1",
-			title: "Meeting",
-			code: "with it project group",
-            time:"19:00",
-            date:"seq 18",
-			description: "asdsadsadsadsad",
-			content:"sadasdsa",
-			//avatar: "images/face-3.jpg",
-		},
-		{
-			id: "2",
-			title: "Meeting",
-			code: "with it project group",
-            time:"19:00",
-            date:"seq 18",
-			description: "asdsadsadsadsad",
-			content:"sadasdsa",
-			//avatar: "images/face-4.jpg",
-		},
+	] ;
+	const mydata = [
 	] ;
 
 	// Project cards data
@@ -172,7 +175,8 @@
             //CardPlatformSettings,
             CardConversations,
 			Cardtodo,
-			CreatTaskForm,
+			//CreatTaskForm,
+			CollectionCreateForm
 		},
         computed:{
             count(){
@@ -185,9 +189,10 @@
 				profileHeaderBtns: 'overview',
 
 				// Associating Conversation's list data with its corresponding property.
-				conversationsData,
+				donedata,
 				tododata,
-				CreatTaskForm,
+				mydata,
+				//CreatTaskForm,
 				// Project cards data
 				size: 'large',
 
@@ -196,11 +201,33 @@
                 modelTitle: '模态框标题',
 			}
 		},
+		created() {
+			this.getTask()
+		},
 		methods: {
       		handleSizeChange(e) {
         		this.size = e.target.value;
       		},
-			  showModal() {
+			  getTask() { 
+					this.$axios(`http://localhost:8081/task/findAll`).then(res => {
+					this.mydata = res.data
+					this.mydata.forEach((i) => {
+						if (i.completed === false){
+							tododata.push(i)
+						}
+						else{
+							donedata.push(i)
+						}
+				})
+				})
+   			},
+			mysplit(){
+				this.mydata.forEach((i) => {
+					console.log(i)
+				})
+
+			},
+			showModal() {
       this.visible = true;
     },
     handleCancel() {
@@ -208,15 +235,29 @@
     },
     handleCreate() {
       const form = this.$refs.collectionForm.form;
+	  console.log(form)
       form.validateFields((err, values) => {
-        if (err) {
-          return;
+        if (!err) {
+			console.log(values.time)
+          this.$axios({
+        url: `http://localhost:8081/task/save`,//地址
+        method: 'post',
+        data: {
+          		name: values.name,
+                contactid: values.contactid,
+                time: values.time,
+                completed: 0,
+                description: values.description,
+                userId:1,
         }
+      	})
+        }
+		console.log(values.name)
         console.log('Received values of form: ', values);
         form.resetFields();
         this.visible = false;
       });
-    },
+    },  
     	},
 
 	})

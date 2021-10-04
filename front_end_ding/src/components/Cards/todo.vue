@@ -23,12 +23,12 @@
 
       <!-- 描述 -->
       <a-list-item-meta style="text-align: left"
-					:title="item.title"
-					:description="item.code"
+					:title="item.name"
+					:description="item.description"
 				>
 
       <!-- title -->
-        <a slot="title" >111</a>
+
 
 
 
@@ -40,8 +40,6 @@
 
       <!-- 时间 -->
       </a-list-item-meta >
-      <div>{{item.date}}    </div>
-       <div>      </div>
         <div>{{item.time}}</div>
     </a-list-item>
 
