@@ -13,13 +13,11 @@ public class UserHandler {
     @Autowired
     private UserRepository userRepository;
 
-    @CrossOrigin
     @GetMapping("/findAll")
     public List<User> findAll(){
         return userRepository.findAll();
     }
 
-    @CrossOrigin
     @PostMapping("/save")
     public String save(@RequestBody User user){
         User result = userRepository.save(user);
@@ -30,13 +28,11 @@ public class UserHandler {
         }
     }
 
-    @CrossOrigin
     @GetMapping("/findid/{id}")
     public User findId(@PathVariable("id") Integer id){
         return userRepository.findById(id).get();
     }
 
-    @CrossOrigin
     @DeleteMapping("/deleteid/{id}")
     public void deleteId(@PathVariable("id") Integer id){
         userRepository.deleteById(id);
