@@ -65,7 +65,7 @@
 				<a-card >
 				<Cardtodo
 					:data="tododata"
-					v-on={deleteinlocal:deleteinlocal}
+					v-on={deleteinlocal:deleteinlocal,editlocal:editlocal}
 				></Cardtodo>
   				</a-card>
 				
@@ -235,6 +235,29 @@
         		})
         		//前端实时删除
         		this.tododata.splice(data_index, 1)
+			},
+			editlocal(item){
+				 let d= {
+						name: item.name,
+						taskid: item.taskid,
+						time: item.time,
+						completed: 1,
+						description: item.description,
+						userId:1,
+					}
+				donedata.push(d)
+				let all=0;
+      			let data_index=0;
+      			let indexdata = this.tododata
+				indexdata.forEach((d)=>{
+					if(d.taskid === item.taskid){
+						data_index=all;
+					}
+					all++;
+        		})
+        		//前端实时删除
+        		this.tododata.splice(data_index, 1)
+				//deleteinlocal(item.taskid)
 			},
 			showModal() {
       			this.visible = true;

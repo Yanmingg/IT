@@ -25,6 +25,9 @@
               <a-button slot="actions" type="primary" @click="delsId(item)">
 							delete
 							</a-button>
+              <a-button slot="actions" type="primary" @click="editcomp(item)">
+							complete
+							</a-button>
 
       <!-- 描述 -->
       <a-list-item-meta style="text-align: left"
@@ -83,6 +86,22 @@ export default {
             method: 'delete',
         })
       this.$emit('deleteinlocal',item.taskid);
+
+    },
+     editcomp(item){
+      this.$axios({
+            url: `http://localhost:8081/task/update`,
+            method: 'put',
+            data: {
+								name: item.name,
+								taskid: item.taskid,
+								time: item.time,
+								completed: 1,
+								description: item.description,
+								userId:1,
+							}
+        })
+      this.$emit('editlocal',item);
 
     },
     // getData(callback) {

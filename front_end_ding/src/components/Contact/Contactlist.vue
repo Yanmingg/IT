@@ -30,7 +30,7 @@ const columns = [
   },
   {
     title: 'Organization',
-    dataIndex: 'organization',
+    dataIndex: 'team',
     width: '20%',
   },
   {
@@ -40,7 +40,7 @@ const columns = [
   },
   {
     title: 'Mobile',
-    dataIndex: 'mobile',
+    dataIndex: 'phone',
     width: '20%'
   },
   {
