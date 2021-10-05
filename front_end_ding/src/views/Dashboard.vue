@@ -65,6 +65,7 @@
 				<a-card >
 				<Cardtodo
 					:data="tododata"
+					v-on={deleteinlocal:deleteinlocal}
 				></Cardtodo>
   				</a-card>
 				
@@ -208,58 +209,86 @@
       		handleSizeChange(e) {
         		this.size = e.target.value;
       		},
-			  getTask() { 
-					this.$axios(`http://localhost:8081/task/findAll`).then(res => {
+			getTask() { 
+				this.$axios(`http://localhost:8081/task/findAll`).then(res => {
 					this.mydata = res.data
 					this.mydata.forEach((i) => {
 						if (i.completed === false){
-							tododata.push(i)
+							if (!(i.taskid in tododata)) { tododata.push(i)}
+							
 						}
 						else{
 							donedata.push(i)
 						}
-				})
+					})
 				})
    			},
-			mysplit(){
-				this.mydata.forEach((i) => {
-					console.log(i)
-				})
-
+			deleteinlocal(id){
+				let all=0;
+      			let data_index=0;
+      			let indexdata = this.tododata
+				indexdata.forEach((d)=>{
+					if(d.taskid === id){
+						data_index=all;
+					}
+					all++;
+        		})
+        		//前端实时删除
+        		this.tododata.splice(data_index, 1)
 			},
 			showModal() {
-      this.visible = true;
-    },
-    handleCancel() {
-      this.visible = false;
-    },
-    handleCreate() {
-      const form = this.$refs.collectionForm.form;
-	  console.log(form)
-      form.validateFields((err, values) => {
-        if (!err) {
-			console.log(values.time)
-          this.$axios({
-        url: `http://localhost:8081/task/save`,//地址
-        method: 'post',
-        data: {
-          		name: values.name,
-                contactid: values.contactid,
-                time: values.time,
-                completed: 0,
-                description: values.description,
-                userId:1,
-        }
-      	})
-        }
-		console.log(values.name)
-        console.log('Received values of form: ', values);
-        form.resetFields();
-        this.visible = false;
-      });
-    },  
-    	},
+      			this.visible = true;
+    		},
+			handleCancel() {
+				this.visible = false;
+			},
+    		handleCreate() {
+				const form = this.$refs.collectionForm.form;
+				console.log(form)
+				form.validateFields((err, values) => {
+					if (!err) {
+						let d = {
+								name: values.name,
+								contactid: values.contactid,
+								time: values['time'].format('YYYY-MM-DD HH:mm:ss'),
+								completed: 0,
+								description: values.description,
+								userId:1,
+							}
+						tododata.push(d)
+						this.$axios({
+							url: `http://localhost:8081/task/save`,//地址
+							method: 'post',
+							data: {
+								name: values.name,
+								contactid: values.contactid,
+								time: values['time'].format('YYYY-MM-DD HH:mm:ss'),
+								completed: 0,
+								description: values.description,
+								userId:1,
+							}
+						})
+					}
+					form.resetFields();
+					this.visible = false;
+				});
+    		},  
+			// handleSubmit(e) {
+			// e.preventDefault();
+			// this.form.validateFields((err, fieldsValue) => {
+			// 	if (err) {
+			// 	return;
+			// 	}
 
+			// 	// Should format date value before submit.
+			// 	const values = {
+			// 	...fieldsValue,
+			// 	'date-time-picker': fieldsValue['date-time-picker'].format('YYYY-MM-DD HH:mm:ss'),
+			// 	};
+			// 	console.log('Received values of form: ', values);
+			// });
+			// },
+    	},
 	})
 
 </script>

@@ -18,8 +18,13 @@
     </div> -->
     
     <a-list-item slot="renderItem" slot-scope="item">
-      <a slot="actions">edit</a>
-      <a slot="actions">delete</a>
+
+       <a-button slot="actions" type="primary" >
+							edit
+							</a-button>
+              <a-button slot="actions" type="primary" @click="delsId(item)">
+							delete
+							</a-button>
 
       <!-- 描述 -->
       <a-list-item-meta style="text-align: left"
@@ -72,6 +77,14 @@ export default {
   //   });
   // },
   methods: {
+    delsId(item){
+      this.$axios({
+            url: `http://localhost:8081/task/deleteid/${item.taskid}`,
+            method: 'delete',
+        })
+      this.$emit('deleteinlocal',item.taskid);
+
+    },
     // getData(callback) {
     //   reqwest({
     //     url: fakeDataUrl,
