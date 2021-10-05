@@ -65,37 +65,17 @@ export default ({
   },
 
   methods:{
-	getcontact(info){
-		// console.log(111111111)
-		info.forEach((i)=>{
-          this.localcontactinfo.name.push(i.name)
-		  this.localcontactinfo.team.push(i.team)
-		  this.localcontactinfo.id.push(i.contactid)
-        })
-		console.log(this.localcontactinfo)
-	},
-    handleChange(value) {
+      handleChange(value) {
 				console.log(`selected ${value}`);
 			},
-    handlesubmit(){
+      handlesubmit(){
       this.form.validateFields((err, values) => {
 				
         if (!err) {
 			values.completed = 0
 			values.time = values['time'].format('YYYY-MM-DD HH:mm:ss')
 			this.$store.commit('dashboard/createDashboard', values)
-						// this.$axios({
-						// 	url: `http://localhost:8081/task/save`,//地址
-						// 	method: 'post',
-						// 	data: {
-						// 		name: values.name,
-						// 		contactid: values.contactid,
-						// 		time: values['time'].format('YYYY-MM-DD HH:mm:ss'),
-						// 		completed: 0,
-						// 		description: values.description,
-						// 		userId:1,
-						// 	}
-						// })
+
 				}
 			});
     	},  

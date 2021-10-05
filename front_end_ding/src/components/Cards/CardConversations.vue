@@ -4,7 +4,7 @@
     class="demo-loadmore-list"
     item-layout="horizontal"
     :data-source="data"
-  > <div slot="header"><h5>Done</h5></div>
+  > <div slot="header" style="text-align: center;"><h5>Done</h5></div>
 
     <!-- <div
       v-if="showLoadingMore"

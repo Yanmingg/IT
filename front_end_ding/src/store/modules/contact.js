@@ -7,7 +7,6 @@ const state = {
 }
 
 const getters = {
-
 }
 const actions = {
     getAllContact({ commit }) { //commit是调用mutations的

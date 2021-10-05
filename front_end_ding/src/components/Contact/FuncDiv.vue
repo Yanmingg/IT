@@ -150,28 +150,22 @@ export default {
         console.log('onSelect', value);
         },
 
+
+
         handleSearch(value) {
-        this.dataSource = value ? this.searchResult(value) : [];
+            this.$emit("searchbyname",value)
+            console.log(value)
+        //this.dataSource = value ? this.searchResult(value) : [];
         },
 
-        getRandomInt(max, min = 0) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-        },
+
+
+
         deleteclient(){
             this.$emit("deleteclient");
         },
         checkvalidselection(){
             this.$emit("checkvalidselection");
-        },
-        searchResult(query) {
-        return new Array(this.getRandomInt(5))
-            .join('.')
-            .split('.')
-            .map((item, idx) => ({
-            query,
-            category: `${query}${idx}`,
-            count: this.getRandomInt(200, 100),
-            }));
         },
         getrecord(values){
             this.$emit("createclient",values);

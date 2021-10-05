@@ -4,7 +4,7 @@
     class="demo-loadmore-list"
     item-layout="horizontal"
     :data-source="data"
-  > <div slot="header"><h5>ToDo</h5></div>
+  > <div slot="header" style="text-align: center;"><h5>ToDo</h5></div>
 
     <!-- <div
       v-if="showLoadingMore"
@@ -19,13 +19,27 @@
     
     <a-list-item slot="renderItem" slot-scope="item">
 
-       <a-button slot="actions" type="primary" >
-							edit
-							</a-button>
-              <a-button slot="actions" type="primary" @click="delsId(item)">
+
+							<Editbuttom slot="actions"
+								ref="refeditbuttom"
+                v-on={setvisible:setvisible}
+							></Editbuttom>
+							<a-modal
+								:visible="visible1"
+								@cancel="handleCancel"
+								@ok="handleCreate"
+							>
+							<EditTask 
+							ref="refedittask"
+
+							></EditTask>
+
+							</a-modal>
+
+              <a-button slot="actions" type="primary" icon="delete" @click="delsId(item)">
 							delete
 							</a-button>
-              <a-button slot="actions" type="primary" @click="editcomp(item)">
+              <a-button slot="actions" type="primary" icon="check" @click="editcomp(item)">
 							complete
 							</a-button>
 
@@ -57,7 +71,8 @@
 //import reqwest from 'reqwest';
 
 //const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
-
+import EditTask from '../Form/editTask.vue';
+import Editbuttom from '../Form/editbuttom.vue';
 export default {
   props: {
 			data: {
@@ -70,40 +85,60 @@ export default {
       loading: true,
       loadingMore: false,
       showLoadingMore: true,
+      visible1: false,
 
     };
   },
+
   // mounted() {
   //   this.getData(res => {
   //     this.loading = false;
   //     this.data = res.results;
   //   });
   // },
+  components: {
+      EditTask,
+			Editbuttom,
+		},
   methods: {
     delsId(item){
-      this.$axios({
-            url: `http://localhost:8081/task/deleteid/${item.taskid}`,
-            method: 'delete',
-        })
-      this.$emit('deleteinlocal',item.taskid);
+      this.$store.commit('dashboard/deleteDashboard', item.taskid)
+      //this.$emit('deleteinlocal',item.taskid);
 
     },
      editcomp(item){
-      this.$axios({
-            url: `http://localhost:8081/task/update`,
-            method: 'put',
-            data: {
-								name: item.name,
-								taskid: item.taskid,
-								time: item.time,
-								completed: 1,
-								description: item.description,
-								userId:1,
-							}
-        })
-      this.$emit('editlocal',item);
+        item.completed = 1
+        this.$store.commit('dashboard/editcDashboard', item)
+      
+      // this.$axios({
+      //       url: `http://localhost:8081/task/update`,
+      //       method: 'put',
+      //       data: {
+			// 					name: item.name,
+			// 					taskid: item.taskid,
+			// 					time: item.time,
+			// 					completed: 1,
+			// 					description: item.description,
+			// 					userId:1,
+			// 				}
+      //   })
+      //this.$emit('editlocal',item);
 
     },
+    // showEdit(item){
+
+    // },
+    handleCancel() {
+				this.visible1 = false;
+			},
+      handleCreate() {
+				this.$refs.refedittask.handlesubmit();
+				this.visible1 = false;
+    		}, 
+        setvisible(visible1){
+				this.visible1 = visible1;
+			},
+
     // getData(callback) {
     //   reqwest({
     //     url: fakeDataUrl,

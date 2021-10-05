@@ -7,6 +7,7 @@
           deleteclient:deleteclient,
           editclient:editclient,
           checkvalidselection:checkvalidselection,
+          searchbyname:searchbyname,
           }">
       </FuncDiv>
       <a-table
@@ -18,6 +19,11 @@
         @change="handleChange"
       >
         <template slot="name" slot-scope="name"> {{ name.first }} {{ name.last }} </template>
+        <div  slot="status" slot-scope="text, record">
+        <a-icon v-if="record.status == 'star'" type="star" style="color: red;fontSize :24px"/>
+        <a-icon v-else-if ="record.status == 'emergency'" type="usb" style="color: blue;fontSize :24px"/>
+        <a-icon v-else type="user"  style="color: green;fontSize :24px"/>
+      </div>
       </a-table>
   </div>
 </template>
@@ -46,10 +52,11 @@ const columns = [
   {
     title: 'Status',
     dataIndex: 'status',
+    scopedSlots: { customRender: 'status' },
     filters: [
       {
-        text: "Star",
-        value: "Star",
+        text: "star",
+        value: "star",
       },
       {
         text: "emergency",
@@ -77,6 +84,8 @@ export default {
       loading: false,
       columns,
       selectedRowKeys:[],
+     ept:[],
+     newinfo:[],
       formLayout: 'horizontal',
       form: this.$form.createForm(this, { name: 'coordinated' }),
     };
@@ -90,6 +99,20 @@ export default {
     }
   },
   methods: {
+    searchbyname(value){
+      this.info.forEach((i)=>{
+      this.$store.state.contact.record=[]
+      if(i.name.indexOf(value) != -1){
+          this.ept.push(i)
+      }
+      this.newinfo.push(i)
+      })
+      this.$store.state.contact.record=this.ept
+      console.log(!value)
+      if(!value){
+        this.$store.state.contact.record=this.newinfo
+      }
+    },
     handleChange(pagination, filters, sorter) {
       console.log('Various parameters', pagination, filters, sorter);
       this.filteredInfo = filters;

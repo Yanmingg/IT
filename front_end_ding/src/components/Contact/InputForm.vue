@@ -31,6 +31,7 @@
                 'description']"
             />
             </a-form-item>
+
             <a-form-item label="Status">
             <a-select
                 v-decorator="[
@@ -51,6 +52,7 @@
                 </a-select-option>
             </a-select>
             </a-form-item>
+
         </a-form>
     </div>   
 </template>
