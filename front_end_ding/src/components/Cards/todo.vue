@@ -22,7 +22,7 @@
 
 							<Editbuttom slot="actions"
 								ref="refeditbuttom"
-                v-on={setvisible:setvisible}
+                v-on={setvisible:setvisible,sendtocreattask:sendtocreattask,sendtoedittask:sendtoedittask}
 							></Editbuttom>
 							<a-modal
 								:visible="visible1"
@@ -73,6 +73,7 @@
 //const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
 import EditTask from '../Form/editTask.vue';
 import Editbuttom from '../Form/editbuttom.vue';
+import {mapState} from 'vuex';
 export default {
   props: {
 			data: {
@@ -80,6 +81,7 @@ export default {
 				default: () => [],
 			},
 		},
+  
   data() {
     return {
       loading: true,
@@ -99,6 +101,12 @@ export default {
   components: {
       EditTask,
 			Editbuttom,
+		},
+  computed:{
+			...mapState({
+				info: state => state.contact.record,
+				taskinfo: state => state.dashboard.record,
+    		}),
 		},
   methods: {
     delsId(item){
@@ -137,6 +145,18 @@ export default {
     		}, 
         setvisible(visible1){
 				this.visible1 = visible1;
+			},
+      sendtocreattask(){
+				setTimeout(()=>{
+					this.$refs.refedittask.getcontact(this.info)
+            	},10)
+			},
+      sendtoedittask(){
+        // console.log(this.item)
+        // console.log(this.title)
+        // setTimeout(()=>{
+				// 	this.$refs.refedittask.getoldform(this.item)
+        //     	},10)
 			},
 
     // getData(callback) {

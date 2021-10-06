@@ -65,6 +65,20 @@ export default ({
   },
 
   methods:{
+      getcontact(info){
+		// console.log(111111111)
+		info.forEach((i)=>{
+          this.localcontactinfo.name.push(i.name)
+		  this.localcontactinfo.team.push(i.team)
+		  this.localcontactinfo.id.push(i.contactid)
+        })
+		console.log(this.localcontactinfo)
+	},
+    getoldform(info){
+        console.log(info)
+        //console.log(this.item)
+
+    },
       handleChange(value) {
 				console.log(`selected ${value}`);
 			},

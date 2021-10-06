@@ -1,5 +1,5 @@
 <template>
-    <a-button type="primary" @click="showModal" icon="plus-circle" fill = "black">
+    <a-button type="primary" @click="showModal" icon="plus-circle" fill = "">
 		Create
 	</a-button>
 </template>
