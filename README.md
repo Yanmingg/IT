@@ -204,15 +204,14 @@ discuss where problems are likely to arise and solve them together.
 ## Review Checklist
 When reviewing a pull request, there are some key aspects that the reviewer should consider. These are encapsulated in the following review checklist:
 
-1. Code formatting: check the code formatting for readability, ensure that proper naming conventions have been followed (e.g. camelCase), and that lines are not too long
+1. Code formatting: check the code formatting for readability, ensure that proper naming conventions have been followed (e.g. camelCase), and that lines are not too long.  
 2. DRY (Do not Repeat Yourself) principle: the same code should not be repeated multiple times
-Commenting: the code should be properly commented for readers to easily understand what the code is doing
-3. Testing: the code should pass all tests (unit tests, integration tests), and be easy to test (refactor into separation functions if required)
-4. Dependencies: new dependencies must be included in the pom.xml
- file
-5. Sanity Checks: when reviewing make sure to see that sanity checks are present, for example, no one is simply getting the data back from the database in a variable and using it without validating it
-6. Error Handling: there should be proper exception handling done to ensure that the code doesn’t crash. Exception handling is mandatory whenever trying to access database for CRUD operations. Also ensure that appropriate messages are sent to the frontend in case of an exception
-7. Code Cleanup: if changes have been made to the flows and some piece of code has become redundant then it should be deleted. This will help ensure the quality of the codebase
+Commenting: the code should be properly commented for readers to easily understand what the code is doing.  
+3. Testing: the code should pass all tests (unit tests, integration tests), and be easy to test (refactor into separation functions if required).  
+4. Dependencies: new dependencies must be included in the pom.xml file.  
+5. Sanity Checks: when reviewing make sure to see that sanity checks are present, for example, no one is simply getting the data back from the database in a variable and using it without validating it.  
+6. Error Handling: there should be proper exception handling done to ensure that the code doesn’t crash. Exception handling is mandatory whenever trying to access database for CRUD operations. Also ensure that appropriate messages are sent to the frontend in case of an exception.  
+7. Code Cleanup: if changes have been made to the flows and some piece of code has become redundant then it should be deleted. This will help ensure the quality of the codebase.  
 
 # Contributing
 The UI interface is written by Ling Huang and Jinjie Ding.  
