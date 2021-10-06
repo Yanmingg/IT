@@ -204,6 +204,14 @@ Version 1.0 - Added class: emailSender, whcih provided the methods to send email
 Version 1.0 - Added the relationship between class User and EmailSender, and tested  
 Version 1.0 - Allowed users to send more than one email at the same time    
 Version 1.0 - Fixed the bug of sending email form an user  
+Version 1.0 - Upload a springBoots structure
+Version 1.0 - Rewrite the springBoots structure
+
+# Version control Policy
+1. Our team employs a version-control policy to ensure the accuracy and integrity of all
+documentation.  
+2. All out of date documentation is removed from the current folder and archived.  
+3. The version control helps the team to understand each other's work well.  
 
 # Contributing
 The UI interface is written by Ling Huang and Jinjie Ding.  

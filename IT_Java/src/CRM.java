@@ -31,6 +31,6 @@ public class CRM {
         user1.addEmailContacts(contact1);
         user1.addEmailContacts(contact3);
         user1.addEmailContacts(contact4);
-        user1.sendEmailToContacts(user1.getEmailContact(),"Testing for sending emails", "Testing");
+        user1.sendEmailToContacts(user1.getEmailContact(),"haha", "Testing");
     }
 }
