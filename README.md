@@ -200,10 +200,10 @@ Version 1.0 - Added import and export csv algorithm for the system
 Version 1.0 - Done with information edit functions  
 Version 1.0 - Added comments to the system  
 Version 1.0 - Redesign the sorting algorithm and improve the design of inheritance  
-Version 1.0 - Added class: emailSender, whcih provided the methods to send email
-Version 1.0 - Added the relationship between class User and EmailSender, and tested
-Version 1.0 - Allowed users to send more than one email at the same time
-Version 1.0 - Fixed the bug of sending email form an user
+Version 1.0 - Added class: emailSender, whcih provided the methods to send email  
+Version 1.0 - Added the relationship between class User and EmailSender, and tested  
+Version 1.0 - Allowed users to send more than one email at the same time  
+Version 1.0 - Fixed the bug of sending email form an user  
 
 # Contributing
 The UI interface is written by Ling Huang and Jinjie Ding.  
