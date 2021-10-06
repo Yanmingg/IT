@@ -14,21 +14,7 @@ const router = new VueRouter({
             import ("../layouts/BasicLayout.vue"),
         children: [{
                 path: "/",
-                redirect: "/contact",
-            },
-            {
-                path: "/contact",
-                name: "Contact",
-                meta: { icon: 'contacts', title: "Contact" },
-                component: () =>
-                    import ("../views/Contact.vue"),
-            },
-            {
-                path: "/contactTest",
-                name: "ContactTest",
-                meta: { icon: 'contacts', title: "ContactTest" },
-                component: () =>
-                    import ("../views/ContactTest.vue"),
+                redirect: "/dashboard",
             },
             {
                 path: "/dashboard",
@@ -43,6 +29,21 @@ const router = new VueRouter({
                 meta: { icon: 'calendar', title: "Calendar" },
                 component: () =>
                     import ("../views/Calendar.vue"),
+            },
+            {
+                path: "/contact",
+                name: "Contact",
+                hideChildrenInMenu: true,
+                meta: { icon: 'contacts', title: "Contact" },
+                component: () =>
+                    import ("../views/Contact.vue"),
+                children: [{
+                    path: "/contact/{id}",
+                    name: "Contact Detail",
+                    meta: { icon: 'contacts', title: "ContactDetail" },
+                    component: () =>
+                        import ("../views/ContactDetail.vue"),
+                }, ]
             },
             {
                 path: "/setting",

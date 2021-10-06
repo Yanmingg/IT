@@ -1,29 +1,42 @@
 <template>
-  <div style="z-index:0">
-    <a-table
-      :columns="columns"
-      :data-source="data"
-      :pagination="pagination"
-      :row-selection="rowSelection"
-      @change="handleTableChange"
-    >
-      <template slot="name" slot-scope="name"> {{ name.first }} {{ name.last }} </template>
-    </a-table>
+    <div class="global-search-wrapper" style="width: 100%;">
+      <FuncDiv 
+        ref="FuncDiv" 
+        v-on="{
+          createclient:createclient,
+          deleteclient:deleteclient,
+          editclient:editclient,
+          checkvalidselection:checkvalidselection,
+          searchbyname:searchbyname,
+          }">
+      </FuncDiv>
+      <a-table
+        :columns="columns"
+        :data-source="info"
+        :pagination="pagination"
+        :row-selection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
+        rowKey = "contactid"
+        @change="handleChange"
+      >
+        <template slot="name" slot-scope="name"> {{ name.first }} {{ name.last }} </template>
+        <div  slot="status" slot-scope="text, record">
+        <a-icon v-if="record.status == 'star'" type="star" style="color: red;fontSize :24px"/>
+        <a-icon v-else-if ="record.status == 'emergency'" type="usb" style="color: blue;fontSize :24px"/>
+        <a-icon v-else type="user"  style="color: green;fontSize :24px"/>
+      </div>
+      </a-table>
   </div>
 </template>
 <script>
-const queryData = {}
 const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
-    sorter: true,
     width: '20%',
   },
   {
     title: 'Organization',
-    dataIndex: 'organization',
-    sorter: true,
+    dataIndex: 'team',
     width: '20%',
   },
   {
@@ -33,155 +46,156 @@ const columns = [
   },
   {
     title: 'Mobile',
-    dataIndex: 'mobile',
+    dataIndex: 'phone',
     width: '20%'
   },
   {
-    title: 'Tag',
-    dataIndex: 'tag',
-    sorter: true,
+    title: 'Status',
+    dataIndex: 'status',
+    scopedSlots: { customRender: 'status' },
+    filters: [
+      {
+        text: "star",
+        value: "star",
+      },
+      {
+        text: "emergency",
+        value: "emergency",
+      },
+      {
+        text: "general",
+        value: "general",
+      },
+    ],
+    onFilter: (value, record) => record.status.indexOf(value) === 0,
     width: '10%'
   },
 ];
 
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-  },
-  onSelect: (record, selected, selectedRows) => {
-    console.log(record, selected, selectedRows);
-  },
-  onSelectAll: (selected, selectedRows, changeRows) => {
-    console.log(selected, selectedRows, changeRows);
-  },
-};
 
+import {mapState} from 'vuex';
+import FuncDiv from './FuncDiv.vue';
 export default {
+  namespaced: true,
+  components:{FuncDiv},
   data() {
     return {
-      data: [
-      {
-          key:1,
-          name:"zhongli",
-          organization:"liyue",
-          email: "123@tl.com",
-          mobile: "136263",
-          tag: "star",
-        },
-        {
-          key:2,
-          name:"raidian",
-          organization:"daoqi",
-          email: "128@tl.com",
-          mobile: "123534",
-          tag: "common",
-        },
-        {
-          key:2,
-          name:"raidian",
-          organization:"daoqi",
-          email: "128@tl.com",
-          mobile: "123534",
-          tag: "common",
-        },
-        {
-          key:2,
-          name:"raidian",
-          organization:"daoqi",
-          email: "128@tl.com",
-          mobile: "123534",
-          tag: "common",
-        },
-        {
-          key:2,
-          name:"raidian",
-          organization:"daoqi",
-          email: "128@tl.com",
-          mobile: "123534",
-          tag: "common",
-        },
-        {
-          key:2,
-          name:"raidian",
-          organization:"daoqi",
-          email: "128@tl.com",
-          mobile: "123534",
-          tag: "common",
-        },
-
-        {
-          key:2,
-          name:"raidian",
-          organization:"daoqi",
-          email: "128@tl.com",
-          mobile: "123534",
-          tag: "common",
-        },
-        {
-          key:2,
-          name:"raidian",
-          organization:"daoqi",
-          email: "128@tl.com",
-          mobile: "123534",
-          tag: "common",
-        },
-
-        {
-          key:2,
-          name:"raidian",
-          organization:"daoqi",
-          email: "128@tl.com",
-          mobile: "123534",
-          tag: "common",
-        },
-        {
-          key:2,
-          name:"raidian",
-          organization:"daoqi",
-          email: "128@tl.com",
-          mobile: "123534",
-          tag: "common",
-        },
-
-      ],
       pagination: {},
       loading: false,
       columns,
-      rowSelection,
+      selectedRowKeys:[],
+     ept:[],
+     newinfo:[],
+      formLayout: 'horizontal',
+      form: this.$form.createForm(this, { name: 'coordinated' }),
     };
   },
-  mounted() {
-    this.fetch();
+  computed: {
+    ...mapState({
+      info: state => state.contact.record,
+    }),
   },
   methods: {
-    handleTableChange(pagination, filters, sorter) {
-      console.log(pagination);
-      const pager = { ...this.pagination };
-      pager.current = pagination.current;
-      this.pagination = pager;
-      this.fetch({
-        results: pagination.pageSize,
-        page: pagination.current,
-        sortField: sorter.field,
-        sortOrder: sorter.order,
-        ...filters,
-      });
+    searchbyname(value){
+      this.info.forEach((i)=>{
+      this.$store.state.contact.record=[]
+      if(i.name.indexOf(value) != -1){
+          this.ept.push(i)
+      }
+      this.newinfo.push(i)
+      })
+      this.$store.state.contact.record=this.ept
+      console.log(!value)
+      if(!value){
+        this.$store.state.contact.record=this.newinfo
+      }
     },
-    fetch(params = {}) {
-      this.loading = true;
-      queryData({
-        results: 10,
-        ...params,
-      }).then(({ data }) => {
-        const pagination = { ...this.pagination };
-        // Read total count from server
-        // pagination.total = data.totalCount;
-        pagination.total = 200;
-        this.loading = false;
-        this.data = data.results;
-        this.pagination = pagination;
-      });
+    handleChange(pagination, filters, sorter) {
+      console.log('Various parameters', pagination, filters, sorter);
+      this.filteredInfo = filters;
+      this.sortedInfo = sorter;
     },
+    onSelectChange(selectedRowKeys) {
+      console.log('selectedRowKeys changed: ', selectedRowKeys);
+      this.selectedRowKeys = selectedRowKeys;
+    },
+    createclient(record){
+      // record["userId"] = 1;
+      // console.log("createclient")
+      this.$store.commit('contact/createContact', record);
+
+      //this.$store.dispatch('contact/getAllContact')
+    },
+    deleteclient(){
+      console.log(11111111111111111)
+      for(let key in this.selectedRowKeys){
+        this.$store.commit('contact/deleteContact', this.selectedRowKeys[key]);
+      }
+      this.selectedRowKeys = []
+    },
+    editclient(record,id){
+      //console.log(222222222222)
+      this.$store.commit('contact/deleteContact',id)
+      this.$store.commit('contact/createContact', record);
+      this.selectedRowKeys = []
+    },
+    checkvalidselection(){
+      if(this.selectedRowKeys.length > 1){
+        this.$refs.FuncDiv.showAlert(1)
+      } else if(this.selectedRowKeys.length < 1){
+        this.$refs.FuncDiv.showAlert(2)
+      } else{
+        for(let i in this.info){
+          if(this.info[i]["contactid"] == this.selectedRowKeys[0]){
+            this.$refs.FuncDiv.postContact(this.info[i]);
+          }
+        }
+      }
+    }
+  },
+  created (){
+    this.$store.dispatch('contact/getAllContact')//在store里调用getAllContact函数  dispatch是调用acction的
   },
 };
 </script>
+<style>
+
+.global-search-wrapper {
+  margin-left: 0%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+.global-search {
+  width: 100%;
+}
+
+.global-search.ant-select-auto-complete .ant-select-selection--single {
+  margin-right: -46px;
+}
+
+.global-search.ant-select-auto-complete .ant-input-affix-wrapper .ant-input:not(:last-child) {
+  padding-right: 62px;
+}
+
+.global-search.ant-select-auto-complete .ant-input-affix-wrapper .ant-input-suffix button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.global-search-item {
+  display: flex;
+}
+
+.global-search-item-desc {
+  flex: auto;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.global-search-item-count {
+  flex: none;
+}
+.count{
+  margin-left: inherit;
+}
+</style>

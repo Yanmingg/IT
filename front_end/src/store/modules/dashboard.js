@@ -28,8 +28,7 @@ const mutations = {
     },
 
     [DASHBOARD.CREATE_DASHBOARD](state, dashboard) {
-        console.log(111111111111111)
-        console.log(dashboard)
+
         axios({
             url: `http://localhost:8081/task/save`,//地址
             method: 'post',
@@ -42,8 +41,16 @@ const mutations = {
                 userId:1,
             }
           })
-          state.record.push(dashboard)
-          console.log(state.record)
+          setTimeout(() => {
+              axios(`http://localhost:8081/task/findAll`)
+            .then(res => {
+                state.record = res.data
+                //commit(DASHBOARD.GET_DASHBOARD,res.data);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+          }, 10);
         
     },
     
@@ -78,6 +85,33 @@ const mutations = {
                 state.record[i]["completed"]=1
             }
         }
+        // state.record.push(dashboard)
+    },
+    [DASHBOARD.EDIT_DASHBOARD](state, dashboard) {
+        console.log("jinru"
+        )
+        axios({
+            url: `http://localhost:8081/task/update`,
+            method: 'put',
+            data: {
+				name: dashboard.name,
+				taskid: dashboard.taskid,
+				time: dashboard.time,
+				completed: dashboard.completed,
+				description: dashboard.description,
+				userId:1,
+			}
+        })
+        setTimeout(() => {
+            axios(`http://localhost:8081/task/findAll`)
+          .then(res => {
+              state.record = res.data
+              //commit(DASHBOARD.GET_DASHBOARD,res.data);
+          })
+          .catch((error) => {
+              console.log(error)
+          })
+        }, 10);
         // state.record.push(dashboard)
     }
 }
