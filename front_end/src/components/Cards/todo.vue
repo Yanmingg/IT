@@ -4,7 +4,7 @@
     class="demo-loadmore-list"
     item-layout="horizontal"
     :data-source="data"
-  > <div slot="header"><h5>ToDo</h5></div>
+  > <div slot="header" style="text-align: center;"><h5>ToDo</h5></div>
 
     <!-- <div
       v-if="showLoadingMore"
@@ -18,17 +18,41 @@
     </div> -->
     
     <a-list-item slot="renderItem" slot-scope="item">
-      <a slot="actions">edit</a>
-      <a slot="actions">delete</a>
+
+
+							<Editbuttom slot="actions"
+								ref="refeditbuttom"
+                @click.native="showEdit(item)"
+                v-on={setvisible:setvisible,sendtocreattask:sendtocreattask,sendtoedittask:sendtoedittask}
+							></Editbuttom>
+
+							<a-modal
+								:visible="visible1"
+								@cancel="handleCancel"
+								@ok="handleCreate"
+							>
+							<EditTask 
+							ref="refedittask"
+            v-on={setvisible:setvisible}
+							></EditTask>
+
+							</a-modal>
+
+              <a-button slot="actions" type="primary" icon="delete" @click="delsId(item)">
+							delete
+							</a-button>
+              <a-button slot="actions" type="primary" icon="check" @click="editcomp(item)">
+							complete
+							</a-button>
 
       <!-- 描述 -->
       <a-list-item-meta style="text-align: left"
-					:title="item.title"
-					:description="item.code"
+					:title="item.name"
+					:description="item.description"
 				>
 
       <!-- title -->
-        <a slot="title" >111</a>
+
 
 
 
@@ -40,8 +64,6 @@
 
       <!-- 时间 -->
       </a-list-item-meta >
-      <div>{{item.date}}    </div>
-       <div>      </div>
         <div>{{item.time}}</div>
     </a-list-item>
 
@@ -51,7 +73,9 @@
 //import reqwest from 'reqwest';
 
 //const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
-
+import EditTask from '../Form/editTask.vue';
+import Editbuttom from '../Form/editbuttom.vue';
+import {mapState} from 'vuex';
 export default {
   props: {
 			data: {
@@ -59,21 +83,95 @@ export default {
 				default: () => [],
 			},
 		},
-  data() {
+  	
+  namespaced: true,
+
+  data() {  
     return {
       loading: true,
       loadingMore: false,
       showLoadingMore: true,
+      visible1: false,
 
     };
   },
+
   // mounted() {
   //   this.getData(res => {
   //     this.loading = false;
   //     this.data = res.results;
   //   });
   // },
+  components: {
+      EditTask,
+			Editbuttom,
+		},
+  computed:{
+			...mapState({
+				info: state => state.contact.record,
+				taskinfo: state => state.dashboard.record,
+    		}),
+		},
   methods: {
+    delsId(item){
+      this.$store.commit('dashboard/deleteDashboard', item.taskid)
+      //this.$emit('deleteinlocal',item.taskid);
+
+    },
+     editcomp(item){
+        item.completed = 1
+        this.$store.commit('dashboard/editcDashboard', item)
+      
+      // this.$axios({
+      //       url: `http://localhost:8081/task/update`,
+      //       method: 'put',
+      //       data: {
+			// 					name: item.name,
+			// 					taskid: item.taskid,
+			// 					time: item.time,
+			// 					completed: 1,
+			// 					description: item.description,
+			// 					userId:1,
+			// 				}
+      //   })
+      //this.$emit('editlocal',item);
+
+    },
+    // showEdit(item){
+
+    // },
+    handleCancel() {
+				this.visible1 = false;
+			},
+
+      handleCreate() {
+				this.$refs.refedittask.handlesubmit();
+    	}, 
+
+      setvisible(visible1){
+				this.visible1 = visible1;
+			},
+
+      
+      sendtocreattask(){
+				setTimeout(()=>{
+					this.$refs.refedittask.getcontact(this.info)
+            	},10)
+			},
+
+      showEdit(item){
+        setTimeout(()=>{
+          console.log(1111111111111)
+				  console.log(item)
+          this.$refs.refeditbuttom.edit(item)
+            	},10)
+        },
+      sendtoedittask(item){
+        setTimeout(()=>{
+					this.$refs.refedittask.getolddata(item)
+            	},10)
+			},
+
     // getData(callback) {
     //   reqwest({
     //     url: fakeDataUrl,

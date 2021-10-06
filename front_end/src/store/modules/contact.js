@@ -28,9 +28,6 @@ const mutations = {
         state.record = contact
     },
     [CONTACT.CREATE_CONTACT](state, contact) {
-        console.log(33333333333333)
-        console.log(contact)
-        state.record.push(contact)
         axios({
             url: `http://localhost:8081/contact/save`,//地址
             method: 'post',
@@ -44,13 +41,30 @@ const mutations = {
                 userId:1,
             }
           })
+
+        setTimeout(() => {
+              axios(`http://localhost:8081/contact/findAll`)
+            .then(res => {
+                console.log("jinru")
+                console.log(res.data)
+                state.record = res.data
+                console.log("jinru")
+                console.log(state.record)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+            console.log(state.record)
+        }, 10);
+          
+
+          //dispatch('getAllContact')
     },
     [CONTACT.DELETE_CONTACT](state, id) {
         console.log(state);
         for (let i in state.record) {
             //console.log('now on key: ', state.record[i]["id"], 'should delete id ', id)
             if (state.record[i]["contactid"] === id) {
-                console.log(111111111111111);
                 axios({
                     url: `http://localhost:8081/contact/deleteid/${id}`,
                     method: 'delete',

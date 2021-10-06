@@ -1,64 +1,102 @@
 <template>
-<div>
-	<!-- Conversations Card -->
-	<a-card :bordered="false" class="header-solid h-full" :bodyStyle="{paddingTop: 0, paddingBottom: 0 }">
-		<template #title>
 
-		</template>
-		
-		<a-list
-			class="conversations-list"
-			item-layout="horizontal"
-			:split="true"
-			:data-source="data"
-		>
-			<a-list-item slot="renderItem" slot-scope="item">
-				<!-- <a-button slot="actions" type="link">
-					REPLY
-				</a-button> -->
-				<a-list-item-meta style="text-align: left"
-					:title="item.title"
-					:description="item.code"
+  <a-list
+    class="demo-loadmore-list"
+    item-layout="horizontal"
+    :data-source="data"
+  > <div slot="header" style="text-align: center;"><h5>Done</h5></div>
+
+    <!-- <div
+      v-if="showLoadingMore"
+      slot="loadMore"
+      :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }"
+    >
+      <a-spin v-if="loadingMore" />
+      <a-button v-else @click="onLoadMore">
+        loading more
+      </a-button>
+    </div> -->
+    
+    <a-list-item slot="renderItem" slot-scope="item">
+
+
+      <!-- 描述 -->
+      <a-list-item-meta style="text-align: left"
+					:title="item.name"
+					:description="item.description"
 				>
-					<!-- <a-avatar
-					slot="avatar"
-					:size="48"
-					shape="square"
-					:src="item.avatar"
-					/> -->
-				</a-list-item-meta>
-			</a-list-item>
-		</a-list>
-	</a-card>
-	<!-- / Conversations Card -->
-</div>
+
+      <!-- title -->
+
+
+
+
+        <!-- 头像，改成选项 -->
+        <!-- <a-avatar
+          slot="avatar"
+          src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+        /> -->
+
+      <!-- 时间 -->
+      </a-list-item-meta >
+        <div>{{item.time}}</div>
+    </a-list-item>
+
+  </a-list>
 </template>
-
 <script>
+//import reqwest from 'reqwest';
 
-	export default ({
-		props: {
+//const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
+
+export default {
+  props: {
 			data: {
 				type: Array,
 				default: () => [],
 			},
 		},
-		data() {
-			return {
-			}
-		},
-	})
+  data() {
+    return {
+      loading: true,
+      loadingMore: false,
+      showLoadingMore: true,
 
+    };
+  },
+  // mounted() {
+  //   this.getData(res => {
+  //     this.loading = false;
+  //     this.data = res.results;
+  //   });
+  // },
+  methods: {
+    // getData(callback) {
+    //   reqwest({
+    //     url: fakeDataUrl,
+    //     type: 'json',
+    //     method: 'get',
+    //     contentType: 'application/json',
+    //     success: res => {
+    //       callback(res);
+    //     },
+    //   });
+    // },
+    // onLoadMore() {
+    //   this.loadingMore = true;
+    //   this.getData(res => {
+    //     this.data = this.data.concat(res.results);
+    //     this.loadingMore = false;
+    //     this.$nextTick(() => {
+    //       window.dispatchEvent(new Event('resize'));
+    //     });
+    //   });
+    // },
+  },
+};
 </script>
-
 <style>
-#components-affix-demo-target.scrollable-container {
-  height: 100px;
-  overflow-y: scroll;
-}
-#components-affix-demo-target .background {
-  padding-top: 60px;
-  height: 300px;
-  background-image: url('https://zos.alipayobjects.com/rmsportal/RmjwQiJorKyobvI.jpg');
+.demo-loadmore-list {
+  min-height: 350px;
 }
 </style>

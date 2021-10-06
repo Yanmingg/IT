@@ -16,13 +16,14 @@
 		<!-- / Header Background Image -->
 
 		<!-- User Profile Card -->
+		
 		<a-card :bordered="false" class="card-profile-head" :bodyStyle="{padding: 0,}">
 			<template #title>
 				<a-row type="flex" align="middle">
 					
 					<a-col :span="24" :md="12" class="col-info">
 						<div class="avatar-info">
-							<h4 class="font-semibold m-0">Welcome Back, Ling! </h4>
+							<h4 class="font-semibold m-0">Welcome Back, {{user.name}} </h4>
 							<span><p>you have 5 tasks to complete</p></span>
 
 						</div>
@@ -30,17 +31,26 @@
 					
 					<a-col :span="24" :md="12" style="display: flex; align-items: center; justify-content: flex-end">
 						 <a-radio-group :value="size" @change="handleSizeChange"> 
-							 <a-button type="primary" @click="showModal">Create</a-button>
-								<a-modal
-									ref="collectionForm"
-									:visible="visible"
-									@cancel="handleCancel"
-									@create="handleCreate"
-									>
-									    <CreatTaskForm
-											:data="conversationsData"
-										></CreatTaskForm>
-								</a-modal>
+						<div>
+
+							<Creatbuttom
+								ref="erzi"
+							 	v-on={setvisible:setvisible,sendtocreattask:sendtocreattask}
+							></Creatbuttom>
+							<a-modal
+								:visible="visible"
+								@cancel="handleCancel"
+								@ok="handleCreate"
+							>
+							<CreatTask
+							ref="collectionForm"
+							 v-on={handleCancel:handleCancel,handleCreate:handleCreate,setvisible:setvisible,}
+							></CreatTask>
+
+							</a-modal>
+
+						</div>
+								
 						</a-radio-group>
 					</a-col>
 
@@ -53,18 +63,7 @@
 		<a-row type="flex" :gutter="24">
 			<!-- Platform Settings Column -->
 			<!-- span是间距，md是宽 -->
-			<a-col :span="24" :md="100" class="mb-24">
-				<!-- Platform Settings Card -->
-
-                <CardConversations
-					:data="conversationsData"
-				></CardConversations>
-				<!-- <CardPlatformSettings></CardPlatformSettings> -->
-
-
-				<!-- / Platform Settings Card -->
-
-			</a-col>
+			
 
 			<!-- / Platform Settings Column -->
 
@@ -75,12 +74,26 @@
 				<a-card >
 				<Cardtodo
 					:data="tododata"
+					v-on={deleteinlocal:deleteinlocal,editlocal:editlocal}
 				></Cardtodo>
   				</a-card>
 				
 
 
 				<!-- / Conversations Card -->
+			</a-col>
+
+			<a-col :span="24" :md="100" class="mb-24">
+				<!-- Platform Settings Card -->
+				<a-card >
+                <CardConversations
+					:data="donedata"
+				></CardConversations>
+				<!-- <CardPlatformSettings></CardPlatformSettings> -->
+				</a-card>
+
+				<!-- / Platform Settings Card -->
+
 			</a-col>
 			<!-- / Conversations Column -->
 		</a-row>
@@ -94,72 +107,16 @@
 <script>
     import Cardtodo from '../components/Cards/todo.vue';
     import CardConversations from '../components/Cards/CardConversations.vue';
-	import CreatTaskForm from '../components/Form/creatTask.vue';
-	// Conversation's list data.
-	const conversationsData = [
-		{
-			id: "1",
-			title: "Meeting",
-			code: "with it project group",
-            time:"19:00",
-            date:"seq 18",
-			//avatar: "images/face-3.jpg",
-		},
-		{
-			id: "2",
-			title: "Meeting",
-			code: "with it project group",
-            time:"19:00",
-            date:"seq 18",
-			//avatar: "images/face-4.jpg",
-		},
-		{
-			id: "3",
-			title: "Meeting",
-			code: "with it project group",
-            time:"19:00",
-            date:"seq 18",
-			//avatar: "images/face-5.jpeg",
-		},
-		{
-			id: "4",
-			title: "Meeting",
-			code: "with it project group",
-            time:"19:00",
-            date:"seq 18",
-			//avatar: "images/face-6.jpeg",
-		},
-		{
-			id: "5",
-			title: "Meeting",
-			code: "with it project group",
-            time:"19:00",
-            date:"seq 18",
-			//avatar: "images/face-2.jpg",
-		},
-	] ;
-	const tododata = [
-		{
-			id: "1",
-			title: "Meeting",
-			code: "with it project group",
-            time:"19:00",
-            date:"seq 18",
-			description: "asdsadsadsadsad",
-			content:"sadasdsa",
-			//avatar: "images/face-3.jpg",
-		},
-		{
-			id: "2",
-			title: "Meeting",
-			code: "with it project group",
-            time:"19:00",
-            date:"seq 18",
-			description: "asdsadsadsadsad",
-			content:"sadasdsa",
-			//avatar: "images/face-4.jpg",
-		},
-	] ;
+	import CreatTask from '../components/Form/creatTask.vue';
+		import Creatbuttom from '../components/Form/creatbuttom.vue';
+	import {mapState} from 'vuex';
+	// const donedata = [
+		
+	// ] ;
+	// const tododata = [
+	// ] ;
+	// const mydata = [
+	// ] ;
 
 	// Project cards data
 
@@ -172,53 +129,172 @@
             //CardPlatformSettings,
             CardConversations,
 			Cardtodo,
-			CreatTaskForm,
+			//CreatTaskForm,
+			CreatTask,
+			Creatbuttom,
+			
 		},
-        computed:{
-            count(){
-                return this.$store.state.count
-            }
-        },
 		data() {
 			return {
 				// Active button for the "User Profile" card's radio button group.
 				profileHeaderBtns: 'overview',
 
 				// Associating Conversation's list data with its corresponding property.
-				conversationsData,
-				tododata,
-				CreatTaskForm,
+				// donedata,
+				// tododata,
+				// mydata,
+				//CreatTaskForm,
 				// Project cards data
+				user:{
+					name:"XXXXXX"
+				},
 				size: 'large',
-
 				visible: false,
                 //模态对话框标题
                 modelTitle: '模态框标题',
 			}
 		},
+		created() {
+			this.creatuser()
+			this.$store.dispatch('dashboard/getAllDshboard')
+			this.$store.dispatch('contact/getAllContact')//在store里调用getAllContact函数  dispatch是调用acction的
+		},
+		computed:{
+			...mapState({
+				info: state => state.contact.record,
+				taskinfo: state => state.dashboard.record,
+    		}),
+			tododata(){
+				let tdata = []
+				this.$store.state.dashboard.record.forEach((i) => {
+					if (i.completed == 0){ 
+						tdata.push(i)
+					}
+				
+				})
+				return tdata
+			},
+			donedata(){
+				let ddata = []
+				this.$store.state.dashboard.record.forEach((i) => {
+					if (i.completed == 1){
+						ddata.push(i)
+					}
+				})
+				return ddata
+			},
+
+			showRecord(){
+				return this.$store.getters.showRecord
+			}
+		},
 		methods: {
+			creatuser(){
+				this.$axios({
+					url: `http://localhost:8081/user/save`,//地址
+					method: 'post',
+					data: {
+						id:1,
+						name: "XXXXX",
+						email: "854799323@qq.com",
+						address: "xxxx,xxxx,xxxx",
+						password:"123456"//给后端整个form
+        			}
+     			 })
+			},
       		handleSizeChange(e) {
         		this.size = e.target.value;
       		},
-			  showModal() {
-      this.visible = true;
-    },
-    handleCancel() {
-      this.visible = false;
-    },
-    handleCreate() {
-      const form = this.$refs.collectionForm.form;
-      form.validateFields((err, values) => {
-        if (err) {
-          return;
-        }
-        console.log('Received values of form: ', values);
-        form.resetFields();
-        this.visible = false;
-      });
-    },
-    	},
+			// getTask() { 
+			// 	this.$axios(`http://localhost:8081/task/findAll`).then(res => {
+			// 		this.mydata = res.data
+			// 		this.mydata.forEach((i) => {
+			// 			if (i.completed === false){
+			// 				if (!(i.taskid in tododata)) { tododata.push(i)}
+							
+			// 			}
+			// 			else{
+			// 				donedata.push(i)
+			// 			}
+			// 		})
+			// 	})
+   			// },
+			deleteinlocal(id){
+				let all=0;
+      			let data_index=0;
+      			let indexdata = this.tododata
+				indexdata.forEach((d)=>{
+					if(d.taskid === id){
+						data_index=all;
+					}
+					all++;
+        		})
+        		//前端实时删除
+        		this.tododata.splice(data_index, 1)
+			},
+			editlocal(item){
+				 let d= {
+						name: item.name,
+						taskid: item.taskid,
+						time: item.time,
+						completed: 1,
+						description: item.description,
+						userId:1,
+					}
+				donedata.push(d)
+				let all=0;
+      			let data_index=0;
+      			let indexdata = this.tododata
+				indexdata.forEach((d)=>{
+					if(d.taskid === item.taskid){
+						data_index=all;
+					}
+					all++;
+        		})
+        		//前端实时删除
+        		this.tododata.splice(data_index, 1)
+				//deleteinlocal(item.taskid)
+			},
+			// showModal() {
+			// 	//在store里调用getAllContact函数  dispatch是调用acction的
+			// 	setTimeout(()=>{
+            //     this.visible = true;
+			// 	console.log(this.$refs.collectionForm)
+			// 	this.$refs.collectionForm.getcontact(this.info)
+            // 	},10)
 
+			// 	//console.log(this.info)
+			// },
+			handleCancel() {
+				this.visible = false;
+			},
+			handleCreate() {
+				this.$refs.collectionForm.handlesubmit();
+    		}, 
+			setvisible(op){
+				this.visible = op;
+			},
+			sendtocreattask(){
+				setTimeout(()=>{
+					this.$refs.collectionForm.getcontact(this.info)
+            	},10)
+			}
+			// handleSubmit(e) {
+			// e.preventDefault();
+			// this.form.validateFields((err, fieldsValue) => {
+			// 	if (err) {
+			// 	return;
+			// 	}
+
+			// 	// Should format date value before submit.
+			// 	const values = {
+			// 	...fieldsValue,
+			// 	'date-time-picker': fieldsValue['date-time-picker'].format('YYYY-MM-DD HH:mm:ss'),
+			// 	};
+			// 	console.log('Received values of form: ', values);
+			// });
+			// },
+    	},
 	})
 
 </script>

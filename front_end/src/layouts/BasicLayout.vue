@@ -1,8 +1,10 @@
 <template>
   <a-layout id="components-layout-demo-side" style="min-height: 100vh">
     <a-layout-sider v-model="collapsed" collapsible>
-      <div class="logo" />
-      
+      <div class="logo">
+        <img src="../assets/logo.png" style="    width: 160px;
+    height: 110px;">
+      </div>
       <Sidemenu/>
     </a-layout-sider>
     <a-layout>
@@ -32,8 +34,8 @@ export default {
 
 <style>
 #components-layout-demo-side .logo {
-  height: 32px;
-  background: rgba(255, 255, 255, 0.2);
+
+  height: 100px;
   margin: 16px;
 }
 </style>

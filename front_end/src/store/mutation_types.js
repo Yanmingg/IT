@@ -9,4 +9,5 @@ export const DASHBOARD = {
     CREATE_DASHBOARD: 'createDashboard',
     DELETE_DASHBOARD: 'deleteDashboard',
     EDIT_C_DASHBOARD: 'editcDashboard',
+    EDIT_DASHBOARD: 'editDashboard',
 }

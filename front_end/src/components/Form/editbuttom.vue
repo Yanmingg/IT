@@ -1,5 +1,5 @@
 <template>
-    <a-button slot="actions" type="primary" icon= "edit" @click="showEdit(item)" >
+    <a-button slot="actions" type="primary" icon= "edit" >
 	 edit
 	</a-button>
 </template>
@@ -9,14 +9,13 @@
 export default ({
     data() {
         return{
-
         }
     },
     methods:{
-        showEdit(){
+        edit(item){
             this.$emit("setvisible",true);
             this.$emit("sendtocreattask");
-            this.$emit("sendtoedittask");
+            this.$emit("sendtoedittask",item);
         },
     }
 })
