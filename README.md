@@ -89,7 +89,7 @@ Here's the location of database```/database```.
 Here's the location of database```/database```.
 
 <p float="left">
-  <img src="/databse/a.jpg" />
+  <img src="/database/a.jpg" />
 </p>
 
 7. Make sure the JRE is version 1.8, then run the program  
