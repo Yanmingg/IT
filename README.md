@@ -55,50 +55,50 @@ npm run lint
 # Configrations
 To run the program, intellij，Mysql workbanch, Mysql installer are required.
 1. Set the MySQL root password: 2000lqy.
-2. Open the file called "itproject.sql", then connect it to the database in the Mysql workbanch.
+2. Open the file called "itproject.sql", then connect it to the database in the Mysql workbanch.  
 
 Here's the location of database```/database```.
 
 <p float="left">
-  <img src="/databse/d.jpg" /
+  <img src="/databse/d.jpg" />
   <img src="/databse/e.jpg" />
 </p>
 
-3. Open the Mysql connection server in Mysql workbanch.
-Here's the location of database```/database```.
+3. Open the Mysql connection server in Mysql workbanch.  
+Here's the location of database```/database```.  
 
 <p float="left">
-  <img src="/databse/f.jpg" /
+  <img src="/databse/f.jpg" />
 </p>
 
-4. Open the itproject.sql file
-Here's the location of database```/database```.
+4. Open the itproject.sql file  
+Here's the location of database```/database```.  
 
 <p float="left">
-  <img src="/databse/g.jpg" /
+  <img src="/databse/g.jpg" />
 </p>
 
-5. Click the yellow flash
-Here's the location of database```/database```.
+5. Click the yellow flash  
+Here's the location of database```/database```.  
 
 <p float="left">
-  <img src="/databse/h.jpg" /
+  <img src="/databse/h.jpg" />
 </p>
 
-6. Open intellij and click the pom.xml file then click reload project
+6. Open intellij and click the pom.xml file then click reload project  
 Here's the location of database```/database```.
 
 <p float="left">
-  <img src="/databse/a.jpg" /
+  <img src="/databse/a.jpg" />
 </p>
 
-7. Make sure the JRE is version 1.8, then run the program
+7. Make sure the JRE is version 1.8, then run the program  
 Here's the location of database```/database```.
 
 <p float="left">
-  <img src="/databse/b.jpg" /
-  <img src="/databse/c.jpg" /
-  <img src="/databse/i.jpg" /
+  <img src="/databse/b.jpg" />
+  <img src="/databse/c.jpg" />
+  <img src="/databse/i.jpg" />
 </p>
 
 ### Customize configuration
