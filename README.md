@@ -60,29 +60,29 @@ To run the program, intellij，Mysql workbanch, Mysql installer are required.
 Here's the location of database```/database```.
 
 <p float="left">
-  <img src="/databse/d.jpg" />
-  <img src="/databse/e.jpg" />
+  <img src="/database/d.jpg" />
+  <img src="/database/e.jpg" />
 </p>
 
 3. Open the Mysql connection server in Mysql workbanch.  
 Here's the location of database```/database```.  
 
 <p float="left">
-  <img src="/databse/f.jpg" />
+  <img src="/database/f.jpg" />
 </p>
 
 4. Open the itproject.sql file  
 Here's the location of database```/database```.  
 
 <p float="left">
-  <img src="/databse/g.jpg" />
+  <img src="/database/g.jpg" />
 </p>
 
 5. Click the yellow flash  
 Here's the location of database```/database```.  
 
 <p float="left">
-  <img src="/databse/h.jpg" />
+  <img src="/database/h.jpg" />
 </p>
 
 6. Open intellij and click the pom.xml file then click reload project  
@@ -96,9 +96,9 @@ Here's the location of database```/database```.
 Here's the location of database```/database```.
 
 <p float="left">
-  <img src="/databse/b.jpg" />
-  <img src="/databse/c.jpg" />
-  <img src="/databse/i.jpg" />
+  <img src="/database/b.jpg" />
+  <img src="/database/c.jpg" />
+  <img src="/database/i.jpg" />
 </p>
 
 ### Customize configuration
