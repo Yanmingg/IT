@@ -166,8 +166,8 @@ Version 1.0 - Added class: email sender, which provided the methods to send emai
 Version 1.0 - Added the relationship between class User and EmailSender, and tested  
 Version 1.0 - Allowed users to send more than one email at the same time    
 Version 1.0 - Fixed the bug of sending email from a user  
-Version 1.0 - Upload a springBoots structure
-Version 1.0 - Rewrite the spring boots structure
+Version 1.0 - Upload a springBoots structure  
+Version 1.0 - Rewrite the spring boots structure  
 
 # Version control Policy
 1. Our team employs a version-control policy to ensure the accuracy and integrity of all
