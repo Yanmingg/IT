@@ -7,12 +7,6 @@
     + [Lints and fixes files](#lints-and-fixes-files)
     + [Customize configuration](#customize-configuration)
 - [Configrations](#configrations)
-- [FrontEnd](#frontend)
-  * [Mockup](#mockup)
-          + [DashBoard](#dashboard)
-          + [Calendar](#calendar)
-          + [Contact](#contact)
-          + [Setting](#setting)
 - [Backend](#backend)
 - [Description of the project (BackEnd)](#description-of-the-project--backend-)
   * [Contact functions:](#contact-functions-)
@@ -26,6 +20,7 @@
   * [The parts that need to merge](#the-parts-that-need-to-merge)
   * [Problems](#problems)
   * [Problem-solving process](#problem-solving-process)
+- [Review checklist](#review-checklist)
 - [Contributing](#contributing)
 
 
@@ -111,45 +106,6 @@ Here's the location of database```/database```.
 </p>
 
 # FrontEnd
-
-## Mockup
-
-###### DashBoard
-
-The dashboard has two parts: task and project, Each part has search, add, delete, modify functions.
-Here's the location of Dashboard Mockup ```/Mockup/Dashboard```.
-
-<p float="left">
-  <img src="/Mockup/Dashboard/Dashboard.png" />
-  <img src="/Mockup/Dashboard/Project overview.png" />
-</p>
-
-
-###### Calendar
-You can see all the calendars for the month, and clicking on a day will show you the task for that day, you can also add a task here.
-Here's the location of Calendar Mockup```/Mockup/Calendar```.
-
-<p float="left">
-  <img src="/Mockup/Calendar/Calendar.png" />
-  <img src="/Mockup/Calendar/Calendar - schedule details.png" />
-</p>
-
-###### Contact
-A list of contacts is displayed here, along with details about each contact, you can import or export contacts in batches and send them an email.
-Here's the location of Contact Mockup```/Mockup/Contact```.
-<p float="left">
-  <img src="/Mockup/Contact/Contact.png" />
-  <img src="/Mockup/Contact/Contact-details-1.png" />
-  <img src="/Mockup/Contact/Contact- BAR.png" />
-</p>
-
-###### Setting
-You can modify your personal information, reminder time, font size, email, password...
-Here's the location of Setting Mockup```/Mockup/Setting```.
-<p float="left">
-  <img src="/Mockup/Setting/Setting- Account.png" />
-</p>
-
 
 # Backend
 This file is the code for the back-end which is written by Java, for dealing with
@@ -244,6 +200,19 @@ Yanming Guo writes about the implementation of specific functions on the back en
 A needs to merge the code with B, B needs to take A to look over THE whole code of B.
 Then they discuss together where to add the code of A. If problems occur after the merge, 
 discuss where problems are likely to arise and solve them together.
+
+## Review Checklist
+When reviewing a pull request, there are some key aspects that the reviewer should consider. These are encapsulated in the following review checklist:
+
+1. Code formatting: check the code formatting for readability, ensure that proper naming conventions have been followed (e.g. camelCase), and that lines are not too long
+2. DRY (Do not Repeat Yourself) principle: the same code should not be repeated multiple times
+Commenting: the code should be properly commented for readers to easily understand what the code is doing
+3. Testing: the code should pass all tests (unit tests, integration tests), and be easy to test (refactor into separation functions if required)
+4. Dependencies: new dependencies must be included in the pom.xml
+ file
+5. Sanity Checks: when reviewing make sure to see that sanity checks are present, for example, no one is simply getting the data back from the database in a variable and using it without validating it
+6. Error Handling: there should be proper exception handling done to ensure that the code doesn’t crash. Exception handling is mandatory whenever trying to access database for CRUD operations. Also ensure that appropriate messages are sent to the frontend in case of an exception
+7. Code Cleanup: if changes have been made to the flows and some piece of code has become redundant then it should be deleted. This will help ensure the quality of the codebase
 
 # Contributing
 The UI interface is written by Ling Huang and Jinjie Ding.  
