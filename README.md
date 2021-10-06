@@ -6,6 +6,7 @@
     + [Run your tests](#run-your-tests)
     + [Lints and fixes files](#lints-and-fixes-files)
     + [Customize configuration](#customize-configuration)
+- [Configrations](#configrations)
 - [FrontEnd](#frontend)
   * [Mockup](#mockup)
           + [DashBoard](#dashboard)
@@ -50,6 +51,55 @@ npm run test
 ```
 npm run lint
 ```
+
+# Configrations
+To run the program, intellij，Mysql workbanch, Mysql installer are required.
+1. Set the MySQL root password: 2000lqy.
+2. Open the file called "itproject.sql", then connect it to the database in the Mysql workbanch.
+
+Here's the location of database```/database```.
+
+<p float="left">
+  <img src="/databse/d.png" /
+  <img src="/databse/e.png" />
+</p>
+
+3. Open the Mysql connection server in Mysql workbanch.
+Here's the location of database```/database```.
+
+<p float="left">
+  <img src="/databse/f.png" /
+</p>
+
+4. Open the itproject.sql file
+Here's the location of database```/database```.
+
+<p float="left">
+  <img src="/databse/g.png" /
+</p>
+
+5. Click the yellow flash
+Here's the location of database```/database```.
+
+<p float="left">
+  <img src="/databse/h.png" /
+</p>
+
+6. Open intellij and click the pom.xml file then click reload project
+Here's the location of database```/database```.
+
+<p float="left">
+  <img src="/databse/a.png" /
+</p>
+
+7. Make sure the JRE is version 1.8, then run the program
+Here's the location of database```/database```.
+
+<p float="left">
+  <img src="/databse/b.png" /
+  <img src="/databse/c.png" /
+  <img src="/databse/i.png" /
+</p>
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
@@ -108,13 +158,12 @@ Contact or schedule, there are three main functions showing below.
 2. Edit the information of a contact in the page
 3. Search the contact by name or team name
 4. Add mark status to the contacts
-5. Send email to a contact
 
 Moreover, in order to improve the efficiency and the users' experience
 we decided to add a sorting function and using binary search, therefore
 the following is the bonus functions and is not required by the clients.
 
-6. Sorting the contact by name, phone, email or team name 
+5. Sorting the contact by name, phone, email or team name 
 
 ## Schedule functions:
 1. New, delete schedule in the page
@@ -128,6 +177,10 @@ the following is the bonus functions and is not required by the clients.
 
 5. Sorting a schedule by name or time
 6. Search the contact by name
+
+## Email sending functions:
+The CRM could let an user send emails to contacts, or providing one or 
+more valid emails
 
 ## Import/export functions:
 The system support to create the information of contacts or schedules by 
