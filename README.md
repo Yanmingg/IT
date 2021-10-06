@@ -51,6 +51,8 @@ npm run test
 ```
 npm run lint
 ```
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
 
 # Configrations
 To run the program, intellij，Mysql workbanch, Mysql installer are required.
@@ -100,9 +102,6 @@ Here's the location of database```/database```.
   <img src="/database/c.jpg" />
   <img src="/database/i.jpg" />
 </p>
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
 
 # FrontEnd
 
