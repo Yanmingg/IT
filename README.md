@@ -75,14 +75,14 @@ Here's the location of database```/database```.
   <img src="/database/f.jpg" />
 </p>
 
-4. Open the itproject.sql file  
+4. Open the itproject.sql file.  
 Here's the location of database```/database```.  
 
 <p float="left">
   <img src="/database/g.jpg" />
 </p>
 
-5. Click the yellow flash  
+5. Click the yellow flash.  
 Here's the location of database```/database```.  
 
 <p float="left">
