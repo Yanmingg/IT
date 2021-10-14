@@ -1,6 +1,7 @@
 package com.example.crm.controller;
 
 import com.example.crm.entity.Account;
+import com.example.crm.entity.Task;
 import com.example.crm.entity.User;
 import com.example.crm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,15 @@ public class UserHandler {
             }
         }
         return "notfind";
+    }
+
+    @PutMapping("/update")
+    public String update(@RequestBody User user){
+        User result = userRepository.save(user);
+        if(result!=null){
+            return "success";
+        }else{
+            return "error";
+        }
     }
 }
