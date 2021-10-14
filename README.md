@@ -75,34 +75,41 @@ Here's the location of database```/database```.
   <img src="/database/f.jpg" />
 </p>
 
-4. Open the itproject.sql file  
+4. Open the itproject.sql file.  
 Here's the location of database```/database```.  
 
 <p float="left">
   <img src="/database/g.jpg" />
 </p>
 
-5. Click the yellow flash  
+5. Click the yellow flash.  
 Here's the location of database```/database```.  
 
 <p float="left">
   <img src="/database/h.jpg" />
 </p>
 
-6. Open IntelliJ and click the pom.xml file then click reload the project  
+6. Open IntelliJ and click the pom.xml file then click reload the project.   
 Here's the location of database```/database```.
 
 <p float="left">
   <img src="/database/a.jpg" />
 </p>
 
-7. Make sure the JRE is version 1.8, then run the program  
+7. Make sure the JRE is version 1.8, then run the program.  
 Here's the location of database```/database```.
 
 <p float="left">
   <img src="/database/b.jpg" />
   <img src="/database/c.jpg" />
   <img src="/database/i.jpg" />
+</p>
+
+8. To set the java.mail library to using email sending functions by clicking 
+libraries in project structure.  
+Here's the location of database```/database```.
+<p float="left">
+  <img src="/database/j.jpg" />
 </p>
 
 # FrontEnd
