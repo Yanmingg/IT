@@ -44,9 +44,11 @@ public class UserHandler {
     public String login(@RequestBody Account account){
         List<User> users = userRepository.findAll();
         for (User user : users){
-            if (user.getEmail().toLowerCase().equals(account.getUseraccount().toLowerCase())){
-                System.out.println(user.getEmail());
-                return "find";
+            if (user.getEmail().equals(account.getUseraccount())){
+                if(user.getPassword().equals(account.getPassword())) {
+                    return "find";
+                }
+                return "passwordWrong";
             }
         }
         return "notfind";
