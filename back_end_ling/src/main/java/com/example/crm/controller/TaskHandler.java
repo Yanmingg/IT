@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping("/task")
-public class TaskController {
+public class TaskHandler {
     @Autowired
     private TaskRepository taskRepository;
 
