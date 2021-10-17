@@ -1,10 +1,13 @@
 package com.example.crm.controller;
 
+import com.example.crm.entity.Account;
+import com.example.crm.entity.Task;
 import com.example.crm.entity.User;
 import com.example.crm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -36,5 +39,29 @@ public class UserHandler {
     @DeleteMapping("/deleteid/{id}")
     public void deleteId(@PathVariable("id") Integer id){
         userRepository.deleteById(id);
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody Account account){
+        List<User> users = userRepository.findAll();
+        for (User user : users){
+            if (user.getEmail().equals(account.getUseraccount())){
+                if(user.getPassword().equals(account.getPassword())) {
+                    return "find";
+                }
+                return "passwordWrong";
+            }
+        }
+        return "notfind";
+    }
+
+    @PutMapping("/update")
+    public String update(@RequestBody User user){
+        User result = userRepository.save(user);
+        if(result!=null){
+            return "success";
+        }else{
+            return "error";
+        }
     }
 }
