@@ -43,7 +43,7 @@ public class UserHandler {
     @PostMapping("/sendEmail")
     public String sendEmail(@RequestBody Email email) throws IOException, MessagingException {
         try {
-            emailSender.sendOneEmail(email.address,email.subject,email.body);
+            emailSender.sendOneEmail(email.address,email.subject,email.body, email.userAddress, email.userName);
         }catch (MessagingException e){
             return "fail";
         }
