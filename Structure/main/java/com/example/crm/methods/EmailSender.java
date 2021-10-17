@@ -96,4 +96,14 @@ public class EmailSender{
         this.draftEmail(receiver, emailSubject, emailBody);
         this.sendEmail();
     }
+
+    // Ready to send emails
+    public void sendEmail(List<String> receiver, String emailSubject,
+                          String emailBody, String senderAddress, String senderName) throws IOException, MessagingException {
+        this.setupServerProperties();
+        String showSender;
+        showSender = "This email was sent by "+ senderName + ". Which email is: " + senderAddress + ".\n";
+        this.draftEmail(receiver, emailSubject, emailBody);
+        this.sendEmail();
+    }
 }
