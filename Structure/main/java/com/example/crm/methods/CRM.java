@@ -1,4 +1,4 @@
-package crm;
+package com.example.crm.methods;
 
 import javax.mail.MessagingException;
 import java.io.IOException;

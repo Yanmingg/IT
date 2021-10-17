@@ -1,8 +1,5 @@
-package crm;
+package com.example.crm.methods;
 
-
-import java.util.Date;
-import java.util.List;
 
 public class Schedule extends CRMObject{
     // Attributes of a schedule

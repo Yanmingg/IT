@@ -1,4 +1,4 @@
-package crm;
+package com.example.crm.methods;
 
 
 import java.util.Collections;
@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /*
-    This class provide sorting methods for the list by
+    This class provide sorting com.example.crm.methods for the list by
     required attributes, it's possible to implement
     all attributes to sort.
  */

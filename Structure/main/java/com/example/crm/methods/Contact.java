@@ -1,4 +1,4 @@
-package crm;
+package com.example.crm.methods;
 public class Contact extends CRMObject{
     // Attributes of a contact
     protected String name = super.getName();

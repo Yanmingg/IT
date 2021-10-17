@@ -1,4 +1,4 @@
-package crm;
+package com.example.crm.methods;
 
 public class CRMObject {
     // Each CRM object should have a name

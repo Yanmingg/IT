@@ -1,11 +1,11 @@
-package crm;
+package com.example.crm.methods;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 /*
-    This class provide binary search methods to search the list by
+    This class provide binary search com.example.crm.methods to search the list by
     name, team name. Moreover, it's possible to implement
     all attributes to search
  */

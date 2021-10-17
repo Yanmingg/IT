@@ -1,4 +1,4 @@
-package crm;
+package com.example.crm.methods;
 
 
 import java.io.IOException;
@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMultipart;
 
 /*
     This class provides the functions to send emails, which provides
-    two methods to deal with sending one email or several emails.
+    two com.example.crm.methods to deal with sending one email or several emails.
     1. Giving one email address
     2. Giving an array list of email address
  */

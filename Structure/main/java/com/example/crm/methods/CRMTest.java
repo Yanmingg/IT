@@ -1,7 +1,5 @@
-package crm;
+package com.example.crm.methods;
 
-
-import java.util.List;
 
 public class CRMTest {
     public ContactPage contactPage = new ContactPage();

@@ -1,4 +1,4 @@
-package crm;
+package com.example.crm.methods;
 
 
 import java.io.FileWriter;

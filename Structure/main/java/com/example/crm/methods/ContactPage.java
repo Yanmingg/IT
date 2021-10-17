@@ -1,7 +1,6 @@
-package crm;
+package com.example.crm.methods;
 
 import javax.mail.MessagingException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
