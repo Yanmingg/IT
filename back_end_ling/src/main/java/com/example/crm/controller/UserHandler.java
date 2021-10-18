@@ -38,7 +38,7 @@ public class UserHandler {
     @PostMapping("/sendEmail")
     public String sendEmail(@RequestBody Email email) throws IOException, MessagingException {
         try {
-            emailSender.sendEmail(email.address,email.subject,email.body, email.userAddress, email.userName);
+            emailSender.sendEmails(email.address,email.subject,email.body, email.userAddress, email.userName);
         }catch (MessagingException e){
             return "fail";
         }

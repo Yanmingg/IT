@@ -90,7 +90,7 @@ public class EmailSender{
     }
 
     // Ready to send emails
-    public void sendEmail(String[] receiver, String emailSubject,
+    public void sendEmails(String[] receiver, String emailSubject,
                           String emailBody, String senderAddress, String senderName) throws IOException, MessagingException {
         this.setupServerProperties();
         String showSender;
@@ -99,6 +99,7 @@ public class EmailSender{
         this.draftEmail(receiver, emailSubject, body);
         this.sendEmail();
     }
+    
     // Ready to send one email
     public void sendOneEmail(String receiver, String emailSubject, String emailBody, String senderAddress, String senderName) throws IOException, MessagingException {
         this.setupServerProperties();
