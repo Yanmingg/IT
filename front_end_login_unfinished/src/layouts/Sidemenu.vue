@@ -11,8 +11,13 @@
       :key="item.path" 
       @click="()=>$router.push({path:item.path})"
     >
-        <a-icon v-if="item.meta.icon" :type="item.meta.icon"/>
-        <span>{{item.meta.title}}</span>
+    <a-icon style=" fontSize: 250%; position: relative;
+  top: px;
+  left: -5px;" v-if="item.meta.icon" :type="item.meta.icon"/>
+        <!-- <a-icon style="color: rgba(0, 0, 0, 1); fontSize: 250%; position: relative;
+  top: px;
+  left: -5px;" v-if="item.meta.icon" :type="item.meta.icon"/> -->
+        <span style="fontSize: 120%">{{item.meta.title}}</span>
     </a-menu-item>
     <sub-menu v-else :menu-info="item" :key="item.path"/>
   </template>
@@ -87,5 +92,28 @@ export default {
 }
 </script>
 <style>
+/* 
+.ant-layout-sider-children {
+    height: 100%;
+    margin-top: -0.1px;
+    padding-top: 0.1px;
+    background-color: rgb(255, 255, 255);
+}
+.ant-menu {
+  background-color: rgb(255, 255, 255);
 
+}
+.ant-menu-item span{
+  color: #000;
+
+} */
+.ant-menu-item-selected span{
+  color: rgb(255, 0, 0);
+}
+.ant-layout-content{
+  background-color: #F9FAFF;
+}
+.a-icon {
+
+}
 </style>

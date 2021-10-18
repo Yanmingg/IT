@@ -34,7 +34,7 @@ export default {
 
 <style>
 #components-layout-demo-side .logo {
-
+  
   height: 100px;
   margin: 16px;
 }
