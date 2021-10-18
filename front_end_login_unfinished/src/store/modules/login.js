@@ -1,39 +1,31 @@
-import { LOGIN } from "../mutation_types"
-import axios from 'axios'
+import { LOGIN } from "../mutation_types";
 
-const state = {
-    user: window.sessionStorage.getItem('user'),
-    token: window.sessionStorage.getItem('token')
-  }
-  const mutations = {
-    //将token保存到sessionStorage里，token表示登陆状态
-    SET_TOKEN: (state, data) => {
-      state.token = data
-      window.sessionStorage.setItem('token', data) 
-    },
-    //获取用户名
-    GET_USER: (state, data) => {
-      // 把用户名存起来
-      state.user = data
-      window.sessionStorage.setItem('user', data)
-    },
-    //登出
-    LOGOUT: (state) => {
-      // 登出的时候要清除token
-      state.token = null
-      state.user = null
-      window.sessionStorage.removeItem('token')
-      window.sessionStorage.removeItem('user')
-    }
-  }
-  
-  const actions = {
-  }
+const state= {
+  isLogin: false,
+};
+const getters= {
+  //获取登录状态
+  isLogin: state => state.isLogin,
+};
+
+const actions= {
+  //获取登录状态
+  userLogin({commit}, flag) {
+    commit(LOGIN.USER_STATUS, flag)
+  },
+};
+
+const mutations= {
+  //保存登录状态
+  [LOGIN.USER_STATUS](state, flag) {
+    state.isLogin = flag
+  },
+};
 
 export default {
-    namespaced: true,
-    state,
-    actions,
-    getters,
-    mutations
-}
+  namespaced: true,
+  state,
+  actions,
+  mutations,
+  getters,
+};

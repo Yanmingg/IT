@@ -1,310 +1,268 @@
 <template>
-<div>
-<div>
-    <!-- client list -->
-    <span>{{ContactTest}}</span>
-    <span>111111111111</span>
-    <div>
-    <a-button @click="delsId">删除</a-button>
-    <a-button @click="postdata">测试Post</a-button>
+  <div class="login">
+    <div class="logo">
+      <img
+        src="../assets/logo1.png"
+        class="logo1"
+        style="width: 500px; height: 180px"
+      />
+      <h2 class="logoh2">
+        THERE'S A LOT MORE <br />TO CRM THAN <br />
+        YOU THINK!
+      </h2>
+      <img
+        src="../assets/tubiao.png"
+        class="logo2"
+        style="width: 700px; height: 180px"
+      />
+    </div>
 
-    <a-table
-      :columns="columns"
-      :data-source="data"
-      :row-selection="{
-        selectedRowKeys: selectedRowKeys,
-        onChange: onSelectChange,
-      }"
-      rowKey="contactid"
-    >
+    <div class="loginform">
+      <a-card :bordered="false" class="loginformcard">
+        <div class="title">
+          <h1 style="font-size: 400%; color: rgb(255, 255, 255)">Login</h1>
+        </div>
+        <a-form
+          id="components-form-demo-normal-login"
+          :form="form"
+          class="login-form"
+          @submit="handleSubmit"
+        >
+          <a-form-item>
+            <a-input
+              class="username"
+              size="large"
+              v-decorator="[
+                'userName',
+                {
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Please input your username!',
+                    },
+                  ],
+                },
+              ]"
+              placeholder="Username"
+            >
+              <a-icon
+                slot="prefix"
+                type="user"
+                style="color: rgba(0, 0, 0, 0.25)"
+              />
+            </a-input>
+          </a-form-item>
+          <a-form-item class="item">
+            <a-input
+              class="passowrd"
+              size="large"
+              v-decorator="[
+                'password',
+                {
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Please input your Password!',
+                    },
+                  ],
+                },
+              ]"
+              type="password"
+              placeholder="Password"
+            >
+              <a-icon
+                slot="prefix"
+                type="lock"
+                style="color: rgba(0, 0, 0, 0.25)"
+              />
+            </a-input>
+          </a-form-item>
+          <a-form-item>
+            <a-checkbox
+              style="color: rgb(255, 255, 255)"
+              class="checkbox"
+              v-decorator="[
+                'remember',
+                {
+                  valuePropName: 'checked',
+                  initialValue: true,
+                },
+              ]"
+            >
+              Remember me
+            </a-checkbox>
 
-    </a-table>
+            <a-button
+              shape="round"
+              html-type="submit"
+              class="login-form-button"
+            >
+              Log in
+            </a-button>
+            <br />
+            <span style="color: rgb(255, 255, 255)">Not registered yet?</span>
+            <a href="/register" style="color: #f19e38"> Create an account </a>
+          </a-form-item>
+        </a-form>
+      </a-card>
+    </div>
 
+    <img src="../assets/Login2.jpg" style="height: 1300px; width: 2600px" />
   </div>
-
-
-    <!-- form -->
-<a-form-model
-    ref="ruleForm"
-    :model="form"
-    :rules="rules"
-    :label-col="labelCol"
-    :wrapper-col="wrapperCol"
-  >
-    <a-form-model-item ref="name" label="Activity name" prop="name">
-      <a-input
-        v-model="form.name"
-        @blur="
-          () => {
-            $refs.name.onFieldBlur();
-          }
-        "
-      />
-    </a-form-model-item>
-    
-    <a-form-model-item ref="email" label="Activity email" prop="email">
-      <a-input
-        v-model="form.email"
-        @blur="
-          () => {
-            $refs.email.onFieldBlur();
-          }
-        "
-      />
-    </a-form-model-item>
-    <a-form-model-item ref="team" label="Activity team" prop="team">
-      <a-input
-        v-model="form.team"
-        @blur="
-          () => {
-            $refs.team.onFieldBlur();
-          }
-        "
-      />
-    </a-form-model-item>
-    <a-form-model-item ref="status" label="Activity status" prop="status">
-      <a-input
-        v-model="form.status"
-        @blur="
-          () => {
-            $refs.status.onFieldBlur();
-          }
-        "
-      />
-    </a-form-model-item>
-     <a-form-model-item ref="phone" label="Activity phone" prop="phone">
-      <a-input
-        v-model="form.phone"
-        @blur="
-          () => {
-            $refs.phone.onFieldBlur();
-          }
-        "
-      />
-    </a-form-model-item>
-    <a-form-model-item ref="description" label="Activity description" prop="description">
-      <a-input
-        v-model="form.description"
-        @blur="
-          () => {
-            $refs.description.onFieldBlur();
-          }
-        "
-      />
-    </a-form-model-item>
-    <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
-      <a-button type="primary" @click="onSubmit">
-        Create
-      </a-button>
-      <a-button style="margin-left: 10px;" @click="resetForm">
-        Reset
-      </a-button>
-    </a-form-model-item>
-  </a-form-model>
-
-</div>
-
-
-</div>
 </template>
+
 <script>
-
-import infiniteScroll from 'vue-infinite-scroll';
-
-const data = [];
-
 export default {
-  directives: { infiniteScroll },
-  name:"ContactTest",
-  data() {
-    return {
-
-      ContactTest:'',
-       columns : [
-      {
-        title: 'Name',
-        dataIndex: 'name',
-        
-      },
-      {
-        title: 'Email',
-        dataIndex: 'email',
-      },
-      {
-        title: 'Phone',
-        dataIndex: 'phone',
-
-      },
-      {
-        title: 'Team',
-        dataIndex: 'team',
-      },
-     ],
-
-      data,
-      selectedRowKeys: [],
-
-
-      labelCol: { span: 4 },
-      wrapperCol: { span: 14 },
-      other: '',
-      form: {
-        name: '',
-        email: '',
-        phone:'',
-        team:'',
-        status:'',
-        description:'',
-        userId:1,
-      },
-
-      rules: {
-        name: [
-          { required: true, message: 'Please input Activity name', trigger: 'blur' },
-          { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' },
-        ],
-        region: [{ required: true, message: 'Please select Activity zone', trigger: 'change' }],
-        date1: [{ required: true, message: 'Please pick a date', trigger: 'change' }],
-        type: [
-          {
-            type: 'array',
-            required: true,
-            message: 'Please select at least one activity type',
-            trigger: 'change',
-          },
-        ],
-        resource: [
-          { required: true, message: 'Please select activity resource', trigger: 'change' },
-        ],
-        desc: [{ required: true, message: 'Please input activity form', trigger: 'blur' }],
-      },
-    };
+  beforeCreate() {
+    this.form = this.$form.createForm(this, { name: "normal_login" });
   },
-    created() {
-
-    this.getContact()
-    this.testMethod()
-  },
-  
   methods: {
-    postdata(){
-      this.$axios.post('http://localhost:8081/customer/register',{
-        username:'jack'
-      }).then(res=>{
-        console.log(res.data)
-      })
-    },
-    testMethod(){
-      this.$axios.get("http://localhost:8081/contact/findAll").then(
-        response=>(
-          this.ContactTest=response.data
-        )
-      )
-    },
-    delsId(){
-      let arr1 = this.selectedRowKeys.sort(); 
-      let all=0;
-      let data_index=0;
-      let indexdata = this.data
-      arr1.forEach((i) => {
-
-        //找index
-        indexdata.forEach((d)=>{
-          if(d.contactid === i){
-            data_index=all;
-          }
-          all++;
-        })
-        //前端实时删除
-        this.data.splice(data_index, 1)
-
-        // /后端delete删除
-        this.$axios({
-            url: `http://localhost:8081/contact/deleteid/${i}`,
-            method: 'delete',
-        })
-      })
-      this.selectedRowKeys = [];
-    },
-    onSelectChange(selectedRowKeys) {
-      this.selectedRowKeys = selectedRowKeys; 
-    },
-
-    // // 单个删除
-    // del(name) {
-    //   const dataSource = [...this.data];
-    //   this.data = dataSource.filter((item) => item.name !== name);
-    // },
-
-    // deleteClient(id) {
-    //     this.$axios({
-    //       url: `http://localhost:8081/contact/${id}`,
-    //       method: 'delete',
-    //     }).then(res => {
-    //       console.log(id);
-    //       this.getContact()
-    //     })
-    // },
-    // 批量删除
-    
-
-     getContact() { //分页查询所有试卷信息
-      this.$axios(`http://localhost:8081/contact/findAll`).then(res => {
-        this.data = res.data
-      })
-    },
-    //点submit后
-    onSubmit() {
-      this.$refs.loginForm.validate(valid => {
-    if (valid) {
-      axios.post('/login', {
-        user: this.loginForm.user,
-        pass: this.loginForm.pass
-      })
-        .then((response) => {
-          if (response.status === 200) {
-            this.$store.commit('SET_TOKEN', response.data.token)
-            this.$store.commit('GET_USER', response.data.user)
-            this.$message({
-              message: '登陆成功',
-              type: 'success'
+    handleSubmit(e) {
+      e.preventDefault();
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          console.log(
+            "Received values of form: ",
+            values.userName,
+            values.password
+          );
+          this.$axios
+            .post("http://localhost:8081/user/login", {
+              useraccount: values.userName,
+              password: values.password,
             })
-            this.$router.push({name: 'activity'})
-          }
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-    } else {
-      console.log('error submit!!')
-      return false
-    }
-  })
-},
-    resetForm() {
-      this.$refs.ruleForm.resetFields();
+            .then((data) => {
+              //登录失败,先不讨论
+              console.log(1111111111111111);
+              console.log(data);
+              if (data.data == -1) {
+                //iViewUi的友好提示
+                //this.$router.push("/dashboard");
+                //登录成功
+                this.$notification.open({
+                  message: "Notification Title",
+                  description:
+                    "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+                  icon: <a-icon type="smile" style="color: #108ee9" />,
+                  style: {
+                    width: "1000px",
+                    hight:"1000px",
+                    marginLeft: `${335 - 600}px`,
+                  },
+                });
+              } else if (data.data == -2) {
+                this.$notification.open({
+                  message: "Notification Title",
+                  description:
+                    "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+                  icon: <a-icon type="smile" style="color: #108ee9" />,
+                  style: {
+                    width: "1000px",
+                    hight:"1000px",
+                    marginLeft: `${335 - 600}px`,
+                  },
+                });
+              } else {
+                //设置Vuex登录标志为true，默认userLogin为false
+                this.$store.dispatch("login/userLogin", true);
+                //Vuex在用户刷新的时候userLogin会回到默认值false，所以我们需要用到HTML5储存
+                //我们设置一个名为Flag，值为isLogin的字段，作用是如果Flag有值且为isLogin的时候，证明用户已经登录了。
+                localStorage.setItem("Flag", "isLogin");
+                //iViewUi的友好提示
+                //登录成功后跳转到指定页面
+                this.$router.push("/dashboard");
+              }
+            });
+        }
+      });
     },
-    onChange(e,title) {
-      console.log(`checked = ${e.target.checked}`);
-      console.log(title);
-    },
-
   },
 };
 </script>
 <style>
-.demo-infinite-container {
-  border: 1px solid #e8e8e8;
-  border-radius: 4px;
-  overflow: auto;
-  padding: 8px 24px;
-  height: 300px;
-}
-.demo-loading-container {
+.logo1 {
   position: absolute;
-  bottom: 40px;
+  top: 200px;
+  left: -100px;
+}
+.logo2 {
+  position: absolute;
+  top: 680px;
+  left: -120px;
+}
+.logoh2 {
+  font-size: 500%;
+  color: rgb(255, 255, 255);
+  position: absolute;
+  top: 350px;
+  left: -73px;
+}
+.ant-input {
+  background-color: rgb(84, 84, 84);
+}
+.ant-btn:hover,
+.ant-btn:focus,
+.ant-btn:active,
+.ant-btn.active {
+  text-decoration: none;
+  background: #f1b03b;
+}
+.loginformcard {
+  background-color: rgb(67, 67, 67);
+}
+.loginform {
+  position: absolute;
+  top: 300px;
+  left: 1500px;
+  height: 200px;
+  width: 700px;
+}
+.login-form-button {
+  color: rgb(255, 255, 255);
+  background-color: #f19e38;
+  height: 80px;
+  width: 50%;
+}
+.h1 {
+  font-size: 500%;
+}
+.logo {
+  position: absolute;
+  top: 50px;
+  left: 300px;
+  height: 200px;
+  width: 50%;
+}
+.button,
+button::after {
+  border: none;
+  margin: 0;
+  padding: none;
+}
+.item {
+  height: 200%;
   width: 100%;
-  text-align: center;
+}
+
+.ant-checkbox-wrapper:hover .ant-checkbox-inner,
+.ant-checkbox:hover .ant-checkbox-inner,
+.ant-checkbox-input:focus + .ant-checkbox-inner {
+  border: 1px solid #f19e38;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner,
+.ant-checkbox-indeterminate .ant-checkbox-inner {
+  background-color: #f19e38;
+  border: 1px solid #ffffff;
+}
+
+#components-form-demo-normal-login .login-form {
+  max-width: 300px;
+}
+#components-form-demo-normal-login .login-form-forgot {
+  float: right;
+}
+#components-form-demo-normal-login .login-form-button {
+  width: 100%;
 }
 </style>
-
