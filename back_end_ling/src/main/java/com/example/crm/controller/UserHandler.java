@@ -60,17 +60,19 @@ public class UserHandler {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody Account account){
+    public Integer login(@RequestBody Account account){
         List<User> users = userRepository.findAll();
         for (User user : users){
             if (user.getEmail().equals(account.getUseraccount())){
                 if(user.getPassword().equals(account.getPassword())) {
-                    return "find";
+                    return 0;
                 }
-                return "passwordWrong";
+                //密码
+                return -1;
             }
         }
-        return "notfind";
+        //账号
+        return -2;
     }
 
     @PutMapping("/update")
