@@ -2,7 +2,9 @@ import { LOGIN } from "../mutation_types";
 
 const state= {
   isLogin: false,
+  userid:0,
 };
+
 const getters= {
   //获取登录状态
   isLogin: state => state.isLogin,

@@ -7,9 +7,9 @@ const state = {
 
 const getters = {};
 const actions = {
-  getAllDshboard({ commit }) {
+  getAllDshboard({ commit },id) {
     //commit是调用mutations的
-    axios(`http://localhost:8081/task/findAll`)
+    axios(`http://localhost:8081/task/findAll/${id}`)
       .then((res) => {
         commit(DASHBOARD.GET_DASHBOARD, res.data);
       })
@@ -24,7 +24,7 @@ const mutations = {
     state.record = dashboard;
   },
 
-  [DASHBOARD.CREATE_DASHBOARD](state, dashboard) {
+  [DASHBOARD.CREATE_DASHBOARD](state, dashboard,id) {
     axios({
       url: `http://localhost:8081/task/save`, //地址
       method: "post",
@@ -34,11 +34,11 @@ const mutations = {
         time: dashboard.time,
         completed: dashboard.completed,
         description: dashboard.description,
-        userId: 1,
+        userId: id,
       },
     });
     setTimeout(() => {
-      axios(`http://localhost:8081/task/findAll`)
+      axios(`http://localhost:8081/task/findAll/${id}`)
         .then((res) => {
           state.record = res.data;
           //commit(DASHBOARD.GET_DASHBOARD,res.data);
@@ -49,15 +49,15 @@ const mutations = {
     }, 10);
   },
 
-  [DASHBOARD.DELETE_DASHBOARD](state, id) {
+  [DASHBOARD.DELETE_DASHBOARD](state, taskid,userid) {
     console.log(state);
     //console.log('now on key: ', state.record[i]["id"], 'should delete id ', id)
     axios({
-      url: `http://localhost:8081/task/deleteid/${id}`,
+      url: `http://localhost:8081/task/deleteid/${taskid}`,
       method: "delete",
     });
     setTimeout(() => {
-      axios(`http://localhost:8081/task/findAll`)
+      axios(`http://localhost:8081/task/findAll/${userid}`)
         .then((res) => {
           state.record = res.data;
           //commit(DASHBOARD.GET_DASHBOARD,res.data);
@@ -67,7 +67,8 @@ const mutations = {
         });
     }, 10);
   },
-  [DASHBOARD.EDIT_C_DASHBOARD](state, dashboard) {
+
+  [DASHBOARD.EDIT_C_DASHBOARD](state, dashboard,id) {
     axios({
       url: `http://localhost:8081/task/update`,
       method: "put",
@@ -77,7 +78,7 @@ const mutations = {
         time: dashboard.time,
         completed: dashboard.completed,
         description: dashboard.description,
-        userId: 1,
+        userId: id,
       },
     });
     for (let i in state.record) {
@@ -87,7 +88,8 @@ const mutations = {
     }
     // state.record.push(dashboard)
   },
-  [DASHBOARD.EDIT_DASHBOARD](state, dashboard) {
+
+  [DASHBOARD.EDIT_DASHBOARD](state, dashboard,id) {
     console.log("jinru");
     axios({
       url: `http://localhost:8081/task/update`,
@@ -98,11 +100,11 @@ const mutations = {
         time: dashboard.time,
         completed: dashboard.completed,
         description: dashboard.description,
-        userId: 1,
+        userId: id,
       },
     });
     setTimeout(() => {
-      axios(`http://localhost:8081/task/findAll`)
+      axios(`http://localhost:8081/task/findAll/${id}`)
         .then((res) => {
           state.record = res.data;
           //commit(DASHBOARD.GET_DASHBOARD,res.data);
@@ -121,3 +123,4 @@ export default {
   getters,
   mutations,
 };
+//,localStorage.getItem("userid")

@@ -9,8 +9,8 @@ const state = {
 const getters = {
 }
 const actions = {
-    getAllContact({ commit }) { //commit是调用mutations的
-        axios(`http://localhost:8081/contact/findAll`)
+    getAllContact({ commit },id) { //commit是调用mutations的
+        axios(`http://localhost:8081/contact/findAll/${id}`)
         .then(res => {
             commit(CONTACT.GET_CONTACT,res.data);
         })
@@ -27,7 +27,7 @@ const mutations = {
     [CONTACT.GET_CONTACT](state, contact) {
         state.record = contact
     },
-    [CONTACT.CREATE_CONTACT](state, contact) {
+    [CONTACT.CREATE_CONTACT](state, contact,id) {
         axios({
             url: `http://localhost:8081/contact/save`,//地址
             method: 'post',
@@ -38,12 +38,12 @@ const mutations = {
                 team: contact.team,
                 status: contact.status,
                 description: contact.description,
-                userId:1,
+                userId:id,
             }
           })
 
         setTimeout(() => {
-              axios(`http://localhost:8081/contact/findAll`)
+              axios(`http://localhost:8081/contact/findAll/${id}`)
             .then(res => {
                 console.log("jinru")
                 console.log(res.data)
@@ -81,3 +81,4 @@ export default {
     getters,
     mutations
 }
+//,localStorage.getItem("userid")

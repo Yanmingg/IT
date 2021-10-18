@@ -122,7 +122,7 @@ export default {
     createclient(record){
       // record["userId"] = 1;
       // console.log("createclient")
-      this.$store.commit('contact/createContact', record);
+      this.$store.commit('contact/createContact', record,localStorage.getItem("userid"));
 
       //this.$store.dispatch('contact/getAllContact')
     },
@@ -136,7 +136,7 @@ export default {
     editclient(record,id){
       //console.log(222222222222)
       this.$store.commit('contact/deleteContact',id)
-      this.$store.commit('contact/createContact', record);
+      this.$store.commit('contact/createContact', record,localStorage.getItem("userid"));
       this.selectedRowKeys = []
     },
     checkvalidselection(){
@@ -154,7 +154,7 @@ export default {
     }
   },
   created (){
-    this.$store.dispatch('contact/getAllContact')//在store里调用getAllContact函数  dispatch是调用acction的
+    this.$store.dispatch('contact/getAllContact',localStorage.getItem("userid"))//在store里调用getAllContact函数  dispatch是调用acction的
   },
 };
 </script>

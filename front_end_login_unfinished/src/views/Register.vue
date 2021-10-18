@@ -92,7 +92,7 @@
               />
             </a-form-item>
 
-            <a-form-item v-bind="formItemLayout" label="Phone Number">
+            <!-- <a-form-item v-bind="formItemLayout" label="Phone Number">
               <a-input
                 v-decorator="[
                   'phone',
@@ -116,8 +116,8 @@
                   <a-select-option value="87"> +86 </a-select-option>
                 </a-select>
               </a-input>
-            </a-form-item>
-
+            </a-form-item> -->
+<!-- 
             <a-form-item
               v-bind="formItemLayout"
               label="Captcha"
@@ -143,7 +143,8 @@
                   <a-button>Get captcha</a-button>
                 </a-col>
               </a-row>
-            </a-form-item>
+            </a-form-item> -->
+
             <a-form-item v-bind="tailFormItemLayout">
               <a-button
                 class="registerButton"
@@ -205,12 +206,23 @@ export default {
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           this.$axios
-            .post("/user/register", {
-              user: values.userName,
+            .post("http://localhost:8081/user/save", {
+              address:"noneed",
+              email:values.email,
+              name: values.name,
               password: values.password,
             })
-            .then(() => {
-              this.$router.push("/login");
+            .then((data) => {
+              if(data.data == -1){
+                this.$notification.open({
+                  message: "This email already register", 
+                  icon: <a-icon type="close-circle" style="color: red" />
+                });
+              }
+              else{
+                this.$router.push("/login");
+              }
+              
             });
           console.log("Received values of form: ", values);
         }

@@ -83,7 +83,7 @@ export default ({
 			this.$emit('setvisible',false);
 			values.completed = 0
 			values.time = values['time'].format('YYYY-MM-DD HH:mm:ss')
-			this.$store.commit('dashboard/createDashboard', values)
+			this.$store.commit('dashboard/createDashboard', values,localStorage.getItem("userid"))
 						// this.$axios({
 						// 	url: `http://localhost:8081/task/save`,//地址
 						// 	method: 'post',
