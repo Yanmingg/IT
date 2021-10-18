@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 import javax.mail.MessagingException;
 import java.io.IOException;
 

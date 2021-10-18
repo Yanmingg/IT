@@ -99,7 +99,7 @@ public class EmailSender{
         this.draftEmail(receiver, emailSubject, body);
         this.sendEmail();
     }
-    
+
     // Ready to send one email
     public void sendOneEmail(String receiver, String emailSubject, String emailBody, String senderAddress, String senderName) throws IOException, MessagingException {
         this.setupServerProperties();
