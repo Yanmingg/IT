@@ -48,7 +48,7 @@ public class EmailSender{
     }
 
     // Hold to send email to several customers
-    private MimeMessage draftEmail(List<String> receiver, String emailSubject,
+    private MimeMessage draftEmail(String[] receiver, String emailSubject,
                                    String emailBody) throws AddressException,
             MessagingException, IOException {
         mimeMessage = new MimeMessage(newSession);
@@ -90,7 +90,7 @@ public class EmailSender{
     }
 
     // Ready to send emails
-    public void sendEmail(List<String> receiver, String emailSubject,
+    public void sendEmail(String[] receiver, String emailSubject,
                           String emailBody, String senderAddress, String senderName) throws IOException, MessagingException {
         this.setupServerProperties();
         String showSender;
