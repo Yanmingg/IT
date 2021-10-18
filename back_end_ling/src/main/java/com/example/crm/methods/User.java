@@ -154,7 +154,8 @@ public class User extends Contact{
 //        System.out.println(emailContactR);
 //        System.out.println(showSender);
 //        System.out.println(body);
-        emailSender.sendOneEmail(emailContactR, emailSubject, body);
+        emailSender.sendOneEmail(emailAddress, emailSubject, body, "aa","bb");
+
     }
     //-------------------------------------------------------------------3
 
@@ -169,7 +170,7 @@ public class User extends Contact{
         String nameContactS = this.getName();
         //System.out.println(contactS.toString());
 
-        showSender = "This email was sent by "+ nameContactS + ". Which email is: " + emailContactS + ".\n";
+        showSender = "This email was sent by " + nameContactS + ". Which email is: " + emailContactS + ".\n";
         String body = showSender + emailBody;
 //        System.out.println(emailContactR);
 //        System.out.println(showSender);

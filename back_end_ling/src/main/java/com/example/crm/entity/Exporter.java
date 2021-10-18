@@ -1,5 +1,4 @@
-package com.example.crm.methods;
-
+package com.example.crm.entity;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,7 +29,7 @@ public class Exporter {
         csvWriter.close();
     }*/
 
-    public void exportSchedules(List<CRMObject> lst) throws IOException {
+    /*public void exportSchedules(List<CRMObject> lst) throws IOException {
         FileWriter csvWriter = new FileWriter("SchedulesExported.csv");
         csvWriter.append("Name");
         csvWriter.append(",");
@@ -46,7 +45,7 @@ public class Exporter {
         }
         csvWriter.flush();
         csvWriter.close();
-    }
+    }*/
 
     // Constructor
     public Exporter() {
@@ -68,8 +67,8 @@ public class Exporter {
         csvWriter.append(",");
         csvWriter.append("Description");
         csvWriter.append("\n");
-        for (CRMObject element: lst) {
-            csvWriter.append(((Contact) element).toCsv());
+        for (Contact element: lst) {
+            csvWriter.append(element.toCsv());
             csvWriter.append("\n");
         }
         csvWriter.flush();
