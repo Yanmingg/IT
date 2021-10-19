@@ -7,6 +7,7 @@ import com.example.crm.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 @RestController
 @RequestMapping("/task")
@@ -31,14 +32,31 @@ public class TaskHandler {
 
     @GetMapping("/findid/{taskid}")
     public Task findId(@PathVariable("taskid") Integer id){
+
         taskRepository.findById(id);
         return taskRepository.getById(id);
     }
 
     @GetMapping("/findclose/{userid}")
     public Task findClose(@PathVariable("userid") Integer id){
-        taskRepository.findById(id);
-        return taskRepository.getById(id);
+        List<Task> taskList = taskRepository.findAll();
+        List<Task> taskList1 = new ArrayList<>();
+        for (Task task: taskList){
+            if(task.getUserId() == id && task.getCompleted() == false){
+                taskList1.add(task);
+            }
+        }
+        if(taskList1.isEmpty()){
+            return null;
+        }
+        Task smallestTask = taskList1.get(0);
+        for (Task task:taskList1){
+            if(smallestTask.getTime().compareTo(task.getTime()) < 0){
+                smallestTask = task;
+            }
+        }
+        System.out.println(smallestTask.getTime());
+        return smallestTask;
     }
 
     @DeleteMapping("/deleteid/{id}")
