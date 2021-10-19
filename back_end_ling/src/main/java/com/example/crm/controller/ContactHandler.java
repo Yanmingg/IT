@@ -34,7 +34,7 @@ public class ContactHandler {
         return contactRepository.getById(id);
     }
 
-    @GetMapping("/findUser/{Userid}")
+    @GetMapping("/finduser/{Userid}")
     public List<Contact> findUser(@PathVariable("Userid") Integer id){
         List<Contact> contactList = contactRepository.findAll();
         List<Contact> contactList1 = new ArrayList<>();

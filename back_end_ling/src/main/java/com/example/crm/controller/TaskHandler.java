@@ -37,6 +37,21 @@ public class TaskHandler {
         return taskRepository.getById(id);
     }
 
+
+    @GetMapping("/finduser/{userid}")
+    public List<Task> findUser(@PathVariable("userid") Integer id){
+        List<Task> taskList = taskRepository.findAll();
+        List<Task> taskList1 = new ArrayList<>();
+        for (Task task: taskList){
+            if(task.getUserId() == id){
+                taskList1.add(task);
+            }
+        }
+        return taskList1;
+    }
+
+
+
     @GetMapping("/findclose/{userid}")
     public Task findClose(@PathVariable("userid") Integer id){
         List<Task> taskList = taskRepository.findAll();
