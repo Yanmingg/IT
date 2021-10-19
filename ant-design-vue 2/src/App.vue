@@ -5,6 +5,36 @@
     
 </template>
 
+<script>
+import dashboard from "./api/dashboard"
+export default {
+  data(){
+    return{
+      closestTask:{}
+    }
+    
+  },
+  methods: {
+    getTask(task){
+      this.closestTask = task
+    },
+    getCurrentTime() {
+      let diff = parseInt((new Date(this.closestTask.time) - new Date()) / (1000 * 60))
+      if(diff == 15){
+        this.$message.info("Task"+ this.closestTask.name + "is going to hold in 15 minutes");
+      }
+      this.$message.info("Task "+ this.closestTask.name + " is not going to hold in 15 minutes");
+      //let diff = this.difference(time,)
+      //console.log(diff)
+    },
+  },
+  created(){
+    dashboard.getClosetTask(task => this.getTask(task))
+    setInterval(this.getCurrentTime,10000)
+  }            
+}
+</script>
+
 <style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

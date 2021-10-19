@@ -65,7 +65,7 @@
                 <a>Add in Task</a>
             </a-menu-item>
             <a-menu-divider />  
-            <a-menu-item key="7">
+            <a-menu-item key="7" @click="setModal4Visible(true);">
                 <a>Send Email</a>
             </a-menu-item>
             </a-menu>
@@ -115,6 +115,21 @@
             >
             </EditContact>    
         </a-modal>
+        <a-modal
+        title="Send Email"
+        :dialog-style="{ top: '20px' }"
+        :visible="modal4Visible"
+        centered
+        okText = 'Send'
+        @ok="setModal4Visible(false)"
+        @cancel="setModal4Visible(false);"
+        >
+            <SendEmail
+                ref="edit"
+                v-on={setModal4Visible:setModal4Visible}
+            >
+            </SendEmail>    
+        </a-modal>
     </div>
 </template>
 <script>
@@ -144,6 +159,9 @@ export default {
             this.modal2Visible = modalVisible;
         },
         setModal3Visible(modalVisible) {
+            this.modal3Visible = modalVisible;
+        },
+        setModal4Visible(modalVisible) {
             this.modal3Visible = modalVisible;
         },
         onSelect(value) {
