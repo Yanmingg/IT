@@ -28,7 +28,7 @@
           <a-col :span="24" :md="12" class="col-info">
             <div class="avatar-info">
               <h4 class="font-semibold m-0">Welcome Back, {{ user.name }}</h4>
-              <span><p>you have 5 tasks to complete</p></span>
+              <span><p>you have {{ user.num }} tasks to complete</p></span>
             </div>
           </a-col>
 
@@ -150,7 +150,8 @@ export default {
       //CreatTaskForm,
       // Project cards data
       user: {
-        name: "XXXXXX",
+        name: localStorage.getItem("name"),
+        num:0,
       },
       size: "large",
       visible: false,
@@ -173,7 +174,9 @@ export default {
       this.$store.state.dashboard.record.forEach((i) => {
         if (i.completed == 0) {
           tdata.push(i);
+          
         }
+        this.user.num = tdata.length;
       });
       return tdata;
     },

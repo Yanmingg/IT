@@ -101,7 +101,7 @@ export default ({
 				values.userId = this.userId
 				values.time = values['time'].format('YYYY-MM-DD HH:mm:ss')
 				console.log(values)
-				this.$store.commit('dashboard/editDashboard', values,localStorage.getItem("userid"))
+				this.$store.commit('dashboard/editDashboard', values)
 
 			}
 

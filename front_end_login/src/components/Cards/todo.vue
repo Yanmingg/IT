@@ -16,56 +16,55 @@
         loading more
       </a-button>
     </div> -->
-    
-    <a-list-item slot="renderItem" slot-scope="item">
+        <a-list-item slot="renderItem" slot-scope="item">
 
 
-							<Editbuttom slot="actions"
-								ref="refeditbuttom"
-                @click.native="showEdit(item)"
-                v-on={setvisible:setvisible,sendtocreattask:sendtocreattask,sendtoedittask:sendtoedittask}
-							></Editbuttom>
+                  <Editbuttom slot="actions"
+                    ref="refeditbuttom"
+                    @click.native="showEdit(item)"
+                    v-on={setvisible:setvisible,sendtocreattask:sendtocreattask,sendtoedittask:sendtoedittask}
+                  ></Editbuttom>
 
-							<a-modal
-								:visible="visible1"
-								@cancel="handleCancel"
-								@ok="handleCreate"
-							>
-							<EditTask 
-							ref="refedittask"
-            v-on={setvisible:setvisible}
-							></EditTask>
+                  <a-modal
+                    :visible="visible1"
+                    @cancel="handleCancel"
+                    @ok="handleCreate"
+                  >
+                  <EditTask 
+                  ref="refedittask"
+                v-on={setvisible:setvisible}
+                  ></EditTask>
 
-							</a-modal>
+                  </a-modal>
 
-              <a-button slot="actions" type="primary" icon="delete" @click="delsId(item)">
-							delete
-							</a-button>
-              <a-button slot="actions" type="primary" icon="check" @click="editcomp(item)">
-							complete
-							</a-button>
+                  <a-button slot="actions" type="primary" icon="delete" @click="delsId(item)">
+                  delete
+                  </a-button>
+                  <a-button slot="actions" type="primary" icon="check" @click="editcomp(item)">
+                  complete
+                  </a-button>
 
-      <!-- 描述 -->
-      <a-list-item-meta style="text-align: left"
-					:title="item.name"
-					:description="item.description"
-				>
+          <!-- 描述 -->
+          <a-list-item-meta style="text-align: left"
+              :title="item.name"
+              :description="item.description"
+            >
 
-      <!-- title -->
-
-
+          <!-- title -->
 
 
-        <!-- 头像，改成选项 -->
-        <!-- <a-avatar
-          slot="avatar"
-          src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-        /> -->
 
-      <!-- 时间 -->
-      </a-list-item-meta >
-        <div>{{item.time}}</div>
-    </a-list-item>
+
+            <!-- 头像，改成选项 -->
+            <!-- <a-avatar
+              slot="avatar"
+              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+            /> -->
+
+          <!-- 时间 -->
+          </a-list-item-meta >
+            <div>{{item.time}}</div>
+        </a-list-item>
 
   </a-list>
 </template>
@@ -114,13 +113,13 @@ export default {
 		},
   methods: {
     delsId(item){
-      this.$store.commit('dashboard/deleteDashboard', item.taskid,localStorage.getItem("userid") )
+      this.$store.commit('dashboard/deleteDashboard', item.taskid)
       //this.$emit('deleteinlocal',item.taskid);
 
     },
      editcomp(item){
         item.completed = 1
-        this.$store.commit('dashboard/editcDashboard', item,localStorage.getItem("userid"))
+        this.$store.commit('dashboard/editcDashboard', item)
       
       // this.$axios({
       //       url: `http://localhost:8081/task/update`,

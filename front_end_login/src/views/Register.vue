@@ -162,7 +162,7 @@
         </div>
       </a-col>
       <a-col :span="12">
-        <img src="../assets/login1.png" style="width: 1280px; height: 1241px" />
+        <img src="../assets/login1.jpg" style="width: 1280px; height: 1241px" />
       </a-col>
     </a-row>
   </div>

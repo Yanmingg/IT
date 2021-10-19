@@ -1,9 +1,68 @@
 <template>
-  <div id = "app">
+  <div id="app">
     <router-view />
   </div>
-    
 </template>
+
+<script>
+import { mapState } from "vuex";
+export default {
+  data() {
+    return {
+      closestTask: {},
+    };
+  },
+  computed: {
+    ...mapState({
+      taskinfo: (state) => state.dashboard.record,
+    }),
+  },
+  methods: {
+    getClosetTask() {
+      var index = 0;
+      var closest = new Date("2200/12/31 23:59:59");
+
+      var time = new Date();
+      for (let i in this.taskinfo) {
+        if (this.taskinfo[i].completed == 0) {
+          if (new Date(this.taskinfo[i].time) - time > 1000 * 60 * 15) {
+            if (closest == time) {
+              closest = new Date(this.taskinfo[i].time);
+              index = i;
+            } else if (closest - new Date(this.taskinfo[i].time) > 0) {
+              closest = new Date(this.taskinfo[i].time);
+              index = i;
+            }
+          }
+        }
+      }
+
+      this.closestTask = this.taskinfo[index];
+    },
+    getCurrentTime() {
+      this.getClosetTask();
+
+      let diff = parseInt(
+        (new Date(this.closestTask.time) - new Date()) / (1000 * 60)
+      );
+      if (diff == 15) {
+        this.$message.info(
+          "Task " + this.closestTask.name + " is going to hold in 15 minutes"
+        );
+      }
+    },
+    checklogin() {
+      if (localStorage.getItem("Flag") == "isLogin") {
+        this.getCurrentTime();
+      }
+    },
+  },
+  created() {
+    this.$store.dispatch("dashboard/getAllDshboard",localStorage.getItem("userid"));
+    setInterval(this.checklogin, 5000);
+  },
+};
+</script>>
 
 <style lang="scss">
 #app {

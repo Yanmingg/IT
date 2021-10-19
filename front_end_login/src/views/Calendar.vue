@@ -12,14 +12,23 @@
       <a-col :span="24" :md="10" class="mb-24">
         <a-col :span="24" :md="24" class="mb-24">
           <a-alert :message="`You selected date: ${selectedValue}`" />
-          <a-card style="width: 1250px">
+          <a-card style="width: 1250px; hight: 1500px">
             <ul v-for="(item, index) in name_list" :key="index">
-              <h6 align="right">{{ item.time }}</h6>
-              <br />
-              <h5 align="left">{{ item.name }}</h5>
-              <br />
-              <p align="left" style="font-size: 10px">{{ item.description }}</p>
-              <br />
+              <h6
+                align="right"
+                style="
+                  position: relative;
+                  top: 50px;
+                  left: -50px;
+                  font-size: 25px;
+                "
+              >
+                {{ item.time }}
+              </h6>
+              <h6 align="left" style="position: relative; top: 10px; left: 0px;font-size: 25px">
+                {{ item.name }}
+              </h6>
+              <p align="left" style="font-size: 25px">{{ item.description }}</p>
               <a-divider></a-divider>
             </ul>
           </a-card>
@@ -48,13 +57,63 @@ export default {
     },
     onSelect(value) {
       this.selectedValue = value.format("YYYY-MM-DD");
+      this.getdata();
+    },
+    compare(property) {
+      return function (a, b) {
+        var value1 = a[property].substring(1, 3);
+        var value2 = b[property].substring(1, 3);
+        if (value1 == value2) {
+          var value3 = a[property].substring(4, 6);
+          var value4 = b[property].substring(4, 6);
+          console.log(value3)
+          return value3 - value4;
+        } else {
+          return value1 - value2;
+        }
+      };
     },
     getdata() {
-      this.$axios(`http://localhost:8081/task/findAll`).then(res => {
-        this.name_list = res.data
-        console.log(res.data)
+      this.$axios(`http://localhost:8081/task/findAll`).then((res) => {
+        this.name_list = res.data;
+        console.log(this.name_list[1]);
+        let n = 0;
 
-      })
+        for (let index = 0; index < this.name_list.length; index++) {
+          const element = this.name_list[index];
+          if (element.time.substring(0, 10) == this.selectedValue) {
+            this.name_list[index].time = element.time.substring(10, 16);
+          }
+          //不等于
+          else {
+            //从xx中删除
+            this.name_list.splice(index, 1);
+            index--;
+          }
+        }
+        console.log(this.name_list);
+        this.name_list.sort(this.compare("time"));
+
+        //   this.name_list.forEach((i) => {
+
+        //     //如果等于选中天
+        //     if(i.time.substring(0,10) == this.selectedValue){
+        //       this.name_list[n].time = i.time.substring(10,16);
+        //     }
+        //     //不等于
+        //     else{
+        //       //从xx中删除
+        //       this.name_list.splice(n,1)
+        //       n--;
+        //     }
+
+        //     //console.log(this.selectedValue)
+
+        //     //console.log(i.time.substring(0,10))
+        //     n++
+        // });
+        //console.log(this.name_list)
+      });
     },
     // getListData(value) {
     //   //for一遍这个月的task的数据
@@ -155,5 +214,8 @@ export default {
 }
 .notes-month section {
   font-size: 28px;
+}
+.ant-card-body ul {
+  height: 150px;
 }
 </style>

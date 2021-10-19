@@ -1,4 +1,8 @@
 <template>
+<div>
+      <div>
+        <img src="../assets/logo.png" style="width: 160px; height: 110px;">
+      </div>
   <a-menu 
     :selectedKeys="selectedKeys"
     :openKeys.sync="openKeys"
@@ -8,6 +12,7 @@
   <template v-for="item in menuData">
     <a-menu-item 
       v-if="!item.children" 
+      style="margin-top: 50px"
       :key="item.path" 
       @click="()=>$router.push({path:item.path})"
     >
@@ -18,11 +23,16 @@
   top: px;
   left: -5px;" v-if="item.meta.icon" :type="item.meta.icon"/> -->
         <span style="fontSize: 120%">{{item.meta.title}}</span>
+        
     </a-menu-item>
-    <sub-menu v-else :menu-info="item" :key="item.path"/>
-  </template>
-  </a-menu>
+    <sub-menu v-else :menu-info="item" :key="item.path"  @click="click"/>
 
+  </template>
+  <a-icon type="close" style=" fontSize: 250%; position: relative;
+  top: px;
+  left: -5px;" @click="logout" />
+  </a-menu>
+</div>
 </template>
 <script>
 import Submenu from "./Submenu.vue";
@@ -57,6 +67,14 @@ export default {
     }
   },
   methods:{
+    click(){
+      console.log(22222222)
+    },
+    logout(){
+      localStorage.setItem("Flag",null);
+      localStorage.setItem("userid",null);
+      this.$router.push("/login");
+    },
     getMenuData(routes = [], parentKeys = [], selectedKey){
       const menuData = [];
       routes.forEach(item =>{

@@ -9,7 +9,7 @@ const getters = {};
 const actions = {
   getAllDshboard({ commit },id) {
     //commit是调用mutations的
-    axios(`http://localhost:8081/task/findAll/${id}`)
+    axios(`http://localhost:8081/task/finduser/${id}`)
       .then((res) => {
         commit(DASHBOARD.GET_DASHBOARD, res.data);
       })
@@ -24,21 +24,22 @@ const mutations = {
     state.record = dashboard;
   },
 
-  [DASHBOARD.CREATE_DASHBOARD](state, dashboard,id) {
+  [DASHBOARD.CREATE_DASHBOARD](state, dashboard) {
+    let userid = localStorage.getItem("userid")
     axios({
       url: `http://localhost:8081/task/save`, //地址
       method: "post",
       data: {
         name: dashboard.name,
-        contactid: dashboard.contactid,
+        contactid: 1,
         time: dashboard.time,
         completed: dashboard.completed,
         description: dashboard.description,
-        userId: id,
+        userId: userid,
       },
     });
     setTimeout(() => {
-      axios(`http://localhost:8081/task/findAll/${id}`)
+      axios(`http://localhost:8081/task/finduser/${userid}`)
         .then((res) => {
           state.record = res.data;
           //commit(DASHBOARD.GET_DASHBOARD,res.data);
@@ -49,7 +50,8 @@ const mutations = {
     }, 10);
   },
 
-  [DASHBOARD.DELETE_DASHBOARD](state, taskid,userid) {
+  [DASHBOARD.DELETE_DASHBOARD](state, taskid) {
+    let userid = localStorage.getItem("userid")
     console.log(state);
     //console.log('now on key: ', state.record[i]["id"], 'should delete id ', id)
     axios({
@@ -57,7 +59,7 @@ const mutations = {
       method: "delete",
     });
     setTimeout(() => {
-      axios(`http://localhost:8081/task/findAll/${userid}`)
+      axios(`http://localhost:8081/task/finduser/${userid}`)
         .then((res) => {
           state.record = res.data;
           //commit(DASHBOARD.GET_DASHBOARD,res.data);
@@ -68,7 +70,8 @@ const mutations = {
     }, 10);
   },
 
-  [DASHBOARD.EDIT_C_DASHBOARD](state, dashboard,id) {
+  [DASHBOARD.EDIT_C_DASHBOARD](state, dashboard) {
+    let userid = localStorage.getItem("userid")
     axios({
       url: `http://localhost:8081/task/update`,
       method: "put",
@@ -78,7 +81,7 @@ const mutations = {
         time: dashboard.time,
         completed: dashboard.completed,
         description: dashboard.description,
-        userId: id,
+        userId: userid,
       },
     });
     for (let i in state.record) {
@@ -89,8 +92,8 @@ const mutations = {
     // state.record.push(dashboard)
   },
 
-  [DASHBOARD.EDIT_DASHBOARD](state, dashboard,id) {
-    console.log("jinru");
+  [DASHBOARD.EDIT_DASHBOARD](state, dashboard) {
+    let userid = localStorage.getItem("userid")
     axios({
       url: `http://localhost:8081/task/update`,
       method: "put",
@@ -100,11 +103,11 @@ const mutations = {
         time: dashboard.time,
         completed: dashboard.completed,
         description: dashboard.description,
-        userId: id,
+        userId: userid,
       },
     });
     setTimeout(() => {
-      axios(`http://localhost:8081/task/findAll/${id}`)
+      axios(`http://localhost:8081/task/finduser/${userid}`)
         .then((res) => {
           state.record = res.data;
           //commit(DASHBOARD.GET_DASHBOARD,res.data);

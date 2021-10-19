@@ -65,7 +65,7 @@
                 <a>Add in Task</a>
             </a-menu-item>
             <a-menu-divider />  
-            <a-menu-item key="7">
+            <a-menu-item key="7" @click="setModal4Visible(true);">
                 <a>Send Email</a>
             </a-menu-item>
             </a-menu>
@@ -115,18 +115,35 @@
             >
             </EditContact>    
         </a-modal>
+         <a-modal
+        title="Send Email"
+        :dialog-style="{ top: '20px' }"
+        :visible="modal4Visible"
+        centered
+        okText = 'Send'
+        @ok="sendEmail()"
+        @cancel="setModal4Visible(false);"
+        >
+            <SendEmail
+                ref="sendEmail"
+                v-on={setModal4Visible:setModal4Visible}
+            >
+            </SendEmail>    
+        </a-modal>
     </div>
 </template>
 <script>
 import Alert from './Alert.vue'
 import InputForm from './InputForm.vue'
 import EditContact from './EditContact.vue'
+import SendEmail from './SendEmail.vue'
 export default {
     namespaced: true,
     components:{
         InputForm,
         Alert,
         EditContact,
+        SendEmail,
     },
     data(){
         return{
@@ -134,6 +151,7 @@ export default {
             modal1Visible: false,
             modal2Visible: false,
             modal3Visible: false,
+            modal4Visible: false,
         }
     },
     methods: {
@@ -146,6 +164,12 @@ export default {
         setModal3Visible(modalVisible) {
             this.modal3Visible = modalVisible;
         },
+        setModal4Visible(modalVisible) {
+            this.modal4Visible = modalVisible;
+        },
+        sendEmail(){
+            this.$refs.sendEmail.handlesubmit();
+        },
         onSelect(value) {
         console.log('onSelect', value);
         },
@@ -153,8 +177,11 @@ export default {
 
 
         handleSearch(value) {
-            this.$emit("searchbyname",value)
             console.log(value)
+            if(value == ""){
+                  this.$store.dispatch('contact/getAllContact',localStorage.getItem("userid"))//在store里调用getAllContact函数  dispatch是调用acction的
+            }
+            this.$store.dispatch("contact/searchContact", value);
         //this.dataSource = value ? this.searchResult(value) : [];
         },
 

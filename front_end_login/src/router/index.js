@@ -11,12 +11,14 @@ const router = new VueRouter({
     {
       path: "/login",
       name: "Login",
+      hideInMenu: true,
       meta: { icon: "login", title: "Login", isLogin: false },
       component: () => import("../views/Login.vue"),
     },
     {
       path: "/register",
       name: "Register",
+      hideInMenu: true,
       meta: { icon: "Register", title: "Register", isLogin: false },
       component: () => import("../views/Register.vue"),
     },
@@ -26,18 +28,19 @@ const router = new VueRouter({
       children: [
         {
           path: "/",
-          redirect: "/dashboard",
+          redirect: "/login",
         },
+        
         {
           path: "/dashboard",
           name: "Dashboard",
-          meta: { icon: "dashboard", title: "Dashboard", isLogin: false },
+          meta: { icon: "dashboard", title: "Dashboard", isLogin: true },
           component: () => import("../views/Dashboard.vue"),
         },
         {
           path: "/calendar",
           name: "Calendar",
-          meta: { icon: "calendar", title: "Calendar", isLogin: false },
+          meta: { icon: "calendar", title: "Calendar", isLogin: true },
           component: () => import("../views/Calendar.vue"),
         },
         {
@@ -73,12 +76,6 @@ const router = new VueRouter({
               name: "Security",
               meta: { icon: "contacts", title: "Security", isLogin: true },
               component: () => import("../views/Security.vue"),
-            },
-            {
-              path: "/setting/email",
-              name: "Email",
-              meta: { icon: "contacts", title: "Email", isLogin: true },
-              component: () => import("../views/Email.vue"),
             },
             {
               path: "/setting/style",
