@@ -26,14 +26,24 @@ public class UserHandler {
     }
 
     @PostMapping("/save")
-    public String save(@RequestBody User user){
+    public Integer save(@RequestBody User user){
+        List<User> users = userRepository.findAll();
+        for (User user1 : users){
+            if (user1.getEmail().equals(user.getEmail())){
+                //already exist
+                return -1;
+            }
+        }
         User result = userRepository.save(user);
         if(result!=null){
-            return "success";
+            //success
+            return 1;
         }else{
-            return "error";
+            //error
+            return -2;
         }
     }
+
     @PostMapping("/sendEmail")
     public String sendEmail(@RequestBody Email email) throws IOException, MessagingException {
         try {

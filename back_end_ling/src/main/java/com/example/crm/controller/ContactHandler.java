@@ -5,6 +5,7 @@ import com.example.crm.repository.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 @RestController
 @RequestMapping("/contact")
@@ -31,6 +32,18 @@ public class ContactHandler {
     public Contact findId(@PathVariable("contactid") Integer id){
         contactRepository.findById(id);
         return contactRepository.getById(id);
+    }
+
+    @GetMapping("/findUser/{Userid}")
+    public List<Contact> findUser(@PathVariable("Userid") Integer id){
+        List<Contact> contactList = contactRepository.findAll();
+        List<Contact> contactList1 = new ArrayList<>();
+        for (Contact contact: contactList){
+            if(contact.getUserId() == id){
+                contactList1.add(contact);
+            }
+        }
+        return contactList1;
     }
 
     @DeleteMapping("/deleteid/{id}")

@@ -35,6 +35,12 @@ public class TaskHandler {
         return taskRepository.getById(id);
     }
 
+    @GetMapping("/findclose/{userid}")
+    public Task findClose(@PathVariable("userid") Integer id){
+        taskRepository.findById(id);
+        return taskRepository.getById(id);
+    }
+
     @DeleteMapping("/deleteid/{id}")
     public void deleteId(@PathVariable("id") Integer id){
         taskRepository.deleteById(id);
