@@ -1,8 +1,6 @@
 package com.example.crm.controller;
 
-import com.example.crm.entity.Contact;
 import com.example.crm.entity.Task;
-import com.example.crm.repository.ContactRepository;
 import com.example.crm.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
