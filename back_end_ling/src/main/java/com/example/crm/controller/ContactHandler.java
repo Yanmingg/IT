@@ -39,7 +39,7 @@ public class ContactHandler {
         List<Contact> contactList = contactRepository.findAll();
         List<Contact> contactList1 = new ArrayList<>();
         for (Contact contact: contactList){
-            if(contact.getName().contains(name)){
+            if(contact.getName().toLowerCase().contains(name.toLowerCase())){
                 contactList1.add(contact);
             }
         }
