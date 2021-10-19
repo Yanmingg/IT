@@ -159,9 +159,9 @@ export default {
     };
   },
   created() {
-    this.creatuser();
-    this.$store.dispatch("dashboard/getAllDshboard");
-    this.$store.dispatch("contact/getAllContact"); //在store里调用getAllContact函数  dispatch是调用acction的
+
+    this.$store.dispatch("dashboard/getAllDshboard",localStorage.getItem("userid"));
+    this.$store.dispatch("contact/getAllContact",localStorage.getItem("userid")); //在store里调用getAllContact函数  dispatch是调用acction的
   },
   computed: {
     ...mapState({
@@ -194,20 +194,11 @@ export default {
   methods: {
     check() {
       localStorage.setItem("Flag",null);
+      localStorage.setItem("userid",null);
     },
-    creatuser() {
-      this.$axios({
-        url: `http://localhost:8081/user/save`, //地址
-        method: "post",
-        data: {
-          id: 1,
-          name: "XXXXX",
-          email: "854799323@qq.com",
-          address: "xxxx,xxxx,xxxx",
-          password: "123456", //给后端整个form
-        },
-      });
-    },
+    // creatuser() {
+    //   console.log(localStorage.getItem("userid"))
+    // },
     handleSizeChange(e) {
       this.size = e.target.value;
     },

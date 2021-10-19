@@ -37,8 +37,6 @@
 
             </a-form-item>
 
-
-
 				<a-form-item label='Description'>
 				<a-input
 					type='textarea'
@@ -60,12 +58,15 @@ export default ({
 			team:[],
 			id:[],
 		},
+		taskid:0,
+		completed:0,
+		userId:1,
         form: this.$form.createForm(this, { name: 'coordinated' }),
     }
   },
 
   methods:{
-	getcontact(info){
+      getcontact(info){
 		// console.log(111111111)
 		info.forEach((i)=>{
           this.localcontactinfo.name.push(i.name)
@@ -74,31 +75,41 @@ export default ({
         })
 		console.log(this.localcontactinfo)
 	},
+    getolddata(item){
+		let date =new Date(item.time)
+		console.log(date)
+		this.form.setFieldsValue({
+          	name: item.name,
+			contactid:item.contactid,
+          	description: item.description,
+        });
+		this.taskid=item.taskid;
+		this.completed=item.completed;
+		this.userId=item.userId;
+    },
     handleChange(value) {
-				console.log(`selected ${value}`);
-			},
+		console.log(`selected ${value}`);
+	},
     handlesubmit(){
-      this.form.validateFields((err, values) => {
-        if (!err) {
-			this.$emit('setvisible',false);
-			values.completed = 0
-			values.time = values['time'].format('YYYY-MM-DD HH:mm:ss')
-			this.$store.commit('dashboard/createDashboard', values)
-						// this.$axios({
-						// 	url: `http://localhost:8081/task/save`,//地址
-						// 	method: 'post',
-						// 	data: {
-						// 		name: values.name,
-						// 		contactid: values.contactid,
-						// 		time: values['time'].format('YYYY-MM-DD HH:mm:ss'),
-						// 		completed: 0,
-						// 		description: values.description,
-						// 		userId:1,
-						// 	}
-						// })
-				}
-			});
-    	},  
-    }
+		console.log(222222222222222)
+		setTimeout(()=>{
+			this.form.validateFields((err, values) => {	
+        	if (!err) {
+				this.$emit('setvisible',false);
+				values.taskid = this.taskid
+				values.completed = this.completed
+				values.userId = this.userId
+				values.time = values['time'].format('YYYY-MM-DD HH:mm:ss')
+				console.log(values)
+				this.$store.commit('dashboard/editDashboard', values,localStorage.getItem("userid"))
+
+			}
+
+		});
+        },10)
+
+    },  
+
+}
 })
 </script>

@@ -75,7 +75,7 @@ public class UserHandler {
         for (User user : users){
             if (user.getEmail().equals(account.getUseraccount())){
                 if(user.getPassword().equals(account.getPassword())) {
-                    return 0;
+                    return user.getId();
                 }
                 //密码
                 return -1;

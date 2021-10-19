@@ -114,13 +114,13 @@ export default {
 		},
   methods: {
     delsId(item){
-      this.$store.commit('dashboard/deleteDashboard', item.taskid)
+      this.$store.commit('dashboard/deleteDashboard', item.taskid,localStorage.getItem("userid") )
       //this.$emit('deleteinlocal',item.taskid);
 
     },
      editcomp(item){
         item.completed = 1
-        this.$store.commit('dashboard/editcDashboard', item)
+        this.$store.commit('dashboard/editcDashboard', item,localStorage.getItem("userid"))
       
       // this.$axios({
       //       url: `http://localhost:8081/task/update`,
