@@ -34,6 +34,18 @@ public class ContactHandler {
         return contactRepository.getById(id);
     }
 
+    @GetMapping("/findname/{Name}")
+    public List<Contact> findUser(@PathVariable("Name") String name){
+        List<Contact> contactList = contactRepository.findAll();
+        List<Contact> contactList1 = new ArrayList<>();
+        for (Contact contact: contactList){
+            if(contact.getName().contains(name)){
+                contactList1.add(contact);
+            }
+        }
+        return contactList1;
+    }
+
     @GetMapping("/finduser/{Userid}")
     public List<Contact> findUser(@PathVariable("Userid") Integer id){
         List<Contact> contactList = contactRepository.findAll();
