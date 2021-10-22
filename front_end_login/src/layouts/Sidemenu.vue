@@ -1,15 +1,18 @@
 <template>
 <div>
-      <div>
-        <img src="../assets/logo.png" style="width: 160px; height: 110px;">
-      </div>
+      
   <a-menu 
     :selectedKeys="selectedKeys"
     :openKeys.sync="openKeys"
     mode="inline"
     :theme="theme"
   >
-  <template v-for="item in menuData">
+  <a-menu-item style="width: auto; height: auto" >
+  <span>
+        <img src="../assets/logo.png" style="width: 150px; height: 100px; ">
+      </span>
+      </a-menu-item>
+  <template v-for="item in menuData" style="margin-top: 100px">
     <a-menu-item 
       v-if="!item.children" 
       style="margin-top: 50px"
@@ -25,12 +28,16 @@
         <span style="fontSize: 120%">{{item.meta.title}}</span>
         
     </a-menu-item>
+    
     <sub-menu v-else :menu-info="item" :key="item.path"  @click="click"/>
 
   </template>
-  <a-icon type="close" style=" fontSize: 250%; position: relative;
-  top: px;
-  left: -5px;" @click="logout" />
+
+  <a-icon type="logout" style=" fontSize: 250%; position: relative;
+  top: 700px;
+  left: 75px;" @click="logout"/>
+  
+
   </a-menu>
 </div>
 </template>
@@ -110,28 +117,26 @@ export default {
 }
 </script>
 <style>
-/* 
+
 .ant-layout-sider-children {
     height: 100%;
     margin-top: -0.1px;
     padding-top: 0.1px;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
 }
 .ant-menu {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
 
 }
 .ant-menu-item span{
-  color: #000;
+  color: rgb(255, 255, 255);
 
-} */
+}
 .ant-menu-item-selected span{
   color: rgb(255, 0, 0);
 }
 .ant-layout-content{
   background-color: #F9FAFF;
 }
-.a-icon {
 
-}
 </style>

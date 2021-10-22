@@ -1,12 +1,15 @@
 <template>
-  <div>
+  <div class="lo">
     <a-row>
       <a-col :span="12">
         <div class="logo">
-          <img src="../assets/logo.png" style="width: 75px; height: 75px" />
-          <br />
-          <br />
 
+          <br />
+          <br />
+          <br />
+          <br />
+  <br />
+          <br />
           <div class="title">
             <h1 style="font-size: 400%">Create An Account</h1>
           </div>
@@ -162,7 +165,7 @@
         </div>
       </a-col>
       <a-col :span="12">
-        <img src="../assets/login1.jpg" style="width: 1280px; height: 1241px" />
+        <img src="../assets/login1.jpg" style="width: 1280px; height: 1297px" />
       </a-col>
     </a-row>
   </div>
@@ -251,6 +254,9 @@ export default {
 };
 </script>
 <style>
+.lo{
+  background-color: rgb(232, 232, 232);
+}
 .loginform {
   position: relative;
   top: 100px;

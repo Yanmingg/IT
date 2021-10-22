@@ -69,20 +69,17 @@ const mutations = {
   },
   [CONTACT.DELETE_CONTACT](state, id) {
     console.log(state);
-    axios({
-      url: `http://localhost:8081/contact/save`, //地址
-      method: "post",
-      data: {
-        name: contact.name,
-        email: contact.email,
-        phone: contact.phone,
-        team: contact.team,
-        status: contact.status,
-        description: contact.description,
-        userId: userid,
-      },
-    });
-  },
+    for (let i in state.record) {
+        //console.log('now on key: ', state.record[i]["id"], 'should delete id ', id)
+        if (state.record[i]["contactid"] === id) {
+            axios({
+                url: `http://localhost:8081/contact/deleteid/${id}`,
+                method: 'delete',
+            })
+            state.record.splice(i, 1);
+        }
+    }
+},
 
 };
 export default {

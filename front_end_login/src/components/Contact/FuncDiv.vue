@@ -36,9 +36,9 @@
             </a-button>
             </a-input>
         </a-auto-complete>
-        <a-dropdown :trigger="['click']" style="margin-left: 1000px">
+        <a-dropdown :trigger="['click']" style="margin-left: 2050px">
             <a class="ant-dropdown-link" @click="e => e.preventDefault()">
-            <a-icon type="appstore" theme="filled" style="fontSize:32px"/>
+            <a-icon type="appstore" theme="filled" style="fontSize:50px"/>
             </a>
             <a-menu slot="overlay">
             <a-menu-item key="0" @click="setModal1Visible(true)">
@@ -54,18 +54,11 @@
             <a-menu-item key="3" >
                 <a>Import Client</a>
             </a-menu-item>
-            <a-menu-item key="4">
-                <a>Export Client</a>
-            </a-menu-item>
-            <a-menu-divider />
-            <a-menu-item key="5">
-                <a>Create Task</a>
-            </a-menu-item>
-            <a-menu-item key="6">
-                <a>Add in Task</a>
+            <a-menu-item key="4" >
+                <a :href="url.downloadUrl" download="contact.csv">Export Client</a>
             </a-menu-item>
             <a-menu-divider />  
-            <a-menu-item key="7" @click="setModal4Visible(true);">
+            <a-menu-item key="5" @click="setModal4Visible(true);">
                 <a>Send Email</a>
             </a-menu-item>
             </a-menu>
@@ -147,6 +140,10 @@ export default {
     },
     data(){
         return{
+          
+url: {
+	downloadUrl: '/file/contact.csv',
+},
             dataSource:[],
             modal1Visible: false,
             modal2Visible: false,

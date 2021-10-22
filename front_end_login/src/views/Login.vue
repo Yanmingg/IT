@@ -110,11 +110,14 @@
 
     <img src="../assets/Login2.jpg" style="height: 1300px; width: 2600px" />
   </div> -->
-  <div>
+  <div class="lo">
     <a-row>
-      <a-col :span="12">
+      <a-col :span="12" >
         <div class="logo">
-          <img src="../assets/logo.png" style="width: 75px; height: 75px" />
+          <br>
+          <br>
+          <br>
+          <br>
           <br />
           <br />
 
@@ -190,7 +193,7 @@
               >
                 Remember me
               </a-checkbox>
-              <a class="login-form-forgot" href=""> Forgot password </a>
+
               <a-button
                 shape="round"
                 type="primary"
@@ -207,7 +210,7 @@
         </div>
       </a-col>
       <a-col :span="12">
-        <img src="../assets/login1.png" style="width: 1280px; height: 1241px" />
+        <img src="../assets/login1.jpg" style="width: 1280px; height: 1297px" />
       </a-col>
     </a-row>
   </div>
@@ -363,6 +366,9 @@ button::after {
 #components-form-demo-normal-login .login-form-button {
   width: 100%;
 } */
+.lo{
+  background-color: rgb(232, 232, 232);
+}
 .ant-input {
   border-radius: 16px;
 }

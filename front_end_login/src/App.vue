@@ -49,6 +49,14 @@ export default {
         this.$message.info(
           "Task " + this.closestTask.name + " is going to hold in 15 minutes"
         );
+        //发邮件
+        this.$axios.post("http://localhost:8081/user/sendEmail", {
+              address: ["garyhuang00@gmail.com"],
+              subject: "remind",
+              body: "Task " + this.closestTask.name + " is going to hold in 15 minutes",
+              userAddress: "personalcrmofficial@gmail.com",
+              userName: "PerCRM",
+            })
       }
     },
     checklogin() {
@@ -59,7 +67,7 @@ export default {
   },
   created() {
     this.$store.dispatch("dashboard/getAllDshboard",localStorage.getItem("userid"));
-    setInterval(this.checklogin, 5000);
+    setInterval(this.checklogin, 10000);//60000
   },
 };
 </script>>

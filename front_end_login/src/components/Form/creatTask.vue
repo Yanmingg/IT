@@ -1,7 +1,7 @@
 <template>
 
 			<a-form layout='vertical' :form="form">
-				<a-form-item label='Nmae'>
+				<a-form-item label='Name'>
 				<a-input
 					v-decorator="[
 					'name',

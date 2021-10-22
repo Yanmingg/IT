@@ -49,12 +49,14 @@ export default {
             values.userName,
             values.password
           );
+          let a = []
+
           this.$axios
             .post("http://localhost:8081/user/sendEmail", {
-              address: values.recevier,
+              address: [values.recevier],
               subject: values.title,
               body: values.content,
-              userAddress: "garyhuang00@gmail.com",
+              userAddress: "854799323@qq.com",
               userName: "LingHuang",
             })
             .then((data) => {

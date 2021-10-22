@@ -16,8 +16,6 @@
     <!-- / Header Background Image -->
 
     <!-- User Profile Card -->
-
-    <a-button type="primary" @click="check">logout</a-button>
     <a-card
       :bordered="false"
       class="card-profile-head"
@@ -28,7 +26,9 @@
           <a-col :span="24" :md="12" class="col-info">
             <div class="avatar-info">
               <h4 class="font-semibold m-0">Welcome Back, {{ user.name }}</h4>
-              <span><p>you have {{ user.num }} tasks to complete</p></span>
+              <span
+                ><p>you have {{ user.num }} tasks to complete</p></span
+              >
             </div>
           </a-col>
 
@@ -142,7 +142,6 @@ export default {
     return {
       // Active button for the "User Profile" card's radio button group.
       profileHeaderBtns: "overview",
-
       // Associating Conversation's list data with its corresponding property.
       // donedata,
       // tododata,
@@ -151,7 +150,7 @@ export default {
       // Project cards data
       user: {
         name: localStorage.getItem("name"),
-        num:0,
+        num: 0,
       },
       size: "large",
       visible: false,
@@ -160,9 +159,14 @@ export default {
     };
   },
   created() {
-
-    this.$store.dispatch("dashboard/getAllDshboard",localStorage.getItem("userid"));
-    this.$store.dispatch("contact/getAllContact",localStorage.getItem("userid")); //在store里调用getAllContact函数  dispatch是调用acction的
+    this.$store.dispatch(
+      "dashboard/getAllDshboard",
+      localStorage.getItem("userid")
+    );
+    this.$store.dispatch(
+      "contact/getAllContact",
+      localStorage.getItem("userid")
+    ); //在store里调用getAllContact函数  dispatch是调用acction的
   },
   computed: {
     ...mapState({
@@ -174,7 +178,6 @@ export default {
       this.$store.state.dashboard.record.forEach((i) => {
         if (i.completed == 0) {
           tdata.push(i);
-          
         }
         this.user.num = tdata.length;
       });
@@ -196,8 +199,8 @@ export default {
   },
   methods: {
     check() {
-      localStorage.setItem("Flag",null);
-      localStorage.setItem("userid",null);
+      localStorage.setItem("Flag", null);
+      localStorage.setItem("userid", null);
     },
     // creatuser() {
     //   console.log(localStorage.getItem("userid"))
