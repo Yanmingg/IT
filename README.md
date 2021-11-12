@@ -112,7 +112,6 @@ Here's the location of database```/database```.
   <img src="/database/j.jpg" />
 </p>
 
-# FrontEnd
 
 # Backend
 This file is the code for the back-end which is written by Java, for dealing with
