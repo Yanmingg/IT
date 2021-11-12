@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://b3b10d0800d593:b7e09fed@us-cdbr-east-04.cleardb.com/heroku_77081fab5bdaa48?reconnect=true
+    username: root
+    password: 20010212
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+server:
+  port: ${PORT:8080}
